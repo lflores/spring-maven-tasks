@@ -13,7 +13,7 @@ import {TaskService} from '../task.service';
     styleUrls: ['./task-search.component.css']
 })
 export class TaskSearchComponent implements OnInit {
-    taskes$: Observable<Task[]>;
+    tasks$: Observable<Task[]>;
     private searchTerms = new Subject<string>();
 
     constructor(private taskService: TaskService) {
@@ -25,7 +25,7 @@ export class TaskSearchComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.taskes$ = this.searchTerms.pipe(
+        this.tasks$ = this.searchTerms.pipe(
             // wait 300ms after each keystroke before considering the term
             debounceTime(300),
 
