@@ -16,9 +16,12 @@
 package com.triadsoft;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.triadsoft.api.model.TaskUpdate;
 import com.triadsoft.model.Task;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.junit.runners.MethodSorters;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -27,8 +30,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -40,6 +42,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
+//@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class TasksControllerTests {
 
     @Autowired
@@ -73,15 +76,13 @@ public class TasksControllerTests {
         this.mockMvc.perform(get("/tasks/15")
                 .contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andDo(print())
-                .andExpect(status().is5xxServerError())
-                .andExpect(jsonPath("$.description").value("Task2"))
-        ;
+                .andExpect(status().isNotFound());
     }
 
     @Test
     public void paramDescriptionShouldReturnTailoredMessage() throws Exception {
         this.mockMvc.perform(get("/tasks").contentType(MediaType.APPLICATION_JSON_VALUE)
-                .param("description", "Task2"))
+                .param("description", "task2"))
                 .andDo(print()).andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(1)))
                 .andExpect(jsonPath("$[0].description").value("Task2"));
@@ -110,7 +111,7 @@ public class TasksControllerTests {
         //La combinación Task2 & true tiene que traer un resultado
         //ver data.sql
         this.mockMvc.perform(get("/tasks").contentType(MediaType.APPLICATION_JSON_VALUE)
-                .param("description", "Task2")
+                .param("description", "task2")
                 .param("resolved", "true"))
                 .andDo(print()).andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(1)))
@@ -160,6 +161,52 @@ public class TasksControllerTests {
                 .andExpect(jsonPath("$.description").value("New Task"))
                 .andExpect(jsonPath("$.resolved").value("true"))
                 .andExpect(jsonPath("$.image").isEmpty())
+        ;
+    }
+
+    @Test
+    public void updateTaskWithOnlyDescription() throws Exception {
+        TaskUpdate task = new TaskUpdate();
+        task.setDescription("Task1 Updated");
+        ObjectMapper mapper = new ObjectMapper();
+        this.mockMvc.perform(
+                put("/tasks/1")
+                        .contentType(MediaType.APPLICATION_JSON_VALUE)
+                        .content(mapper.writeValueAsString(task)))
+                .andDo(print()).andExpect(status().isOk())
+                .andExpect(jsonPath("$.description").value("Task1 Updated"))
+                .andExpect(jsonPath("$.resolved").value("true"))
+                .andExpect(jsonPath("$.image").value("myimage.gif"))
+        ;
+    }
+
+    @Test
+    public void updateTaskWithOnlyImage() throws Exception {
+        TaskUpdate task = new TaskUpdate();
+        task.setImage("images/new-image.gif");
+        ObjectMapper mapper = new ObjectMapper();
+        this.mockMvc.perform(
+                put("/tasks/1")
+                        .contentType(MediaType.APPLICATION_JSON_VALUE)
+                        .content(mapper.writeValueAsString(task)))
+                .andDo(print()).andExpect(status().isOk())
+                //debe ser igual a la imagen actualizada
+                .andExpect(jsonPath("$.image").value("images/new-image.gif"))
+        ;
+    }
+
+    @Test
+    public void updateTaskWithOnlyStatus() throws Exception {
+        TaskUpdate task = new TaskUpdate();
+        task.setResolved(true);
+        ObjectMapper mapper = new ObjectMapper();
+        this.mockMvc.perform(
+                put("/tasks/1")
+                        .contentType(MediaType.APPLICATION_JSON_VALUE)
+                        .content(mapper.writeValueAsString(task)))
+                .andDo(print()).andExpect(status().isOk())
+                //debe tener el distinto estado que el test anterior
+                .andExpect(jsonPath("$.resolved").value("true"))
         ;
     }
 }
