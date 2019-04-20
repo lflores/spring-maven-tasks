@@ -14,7 +14,8 @@ const httpOptions = {
 @Injectable({providedIn: 'root'})
 export class TaskService {
 
-    private tasksUrl = 'api/tasks';  // URL to web api
+    // private tasksUrl = 'api/tasks';  // URL to web api
+    private tasksUrl = 'http://localhost:8080/tasks';  // URL to web api
 
     constructor(
         private http: HttpClient,
@@ -23,7 +24,7 @@ export class TaskService {
 
     /** GET tasks from the server */
     getTasks(): Observable<Task[]> {
-        return this.http.get<Task[]>(this.tasksUrl)
+        return this.http.get<Task[]>(this.tasksUrl, httpOptions )
             .pipe(
                 tap(_ => this.log('fetched tasks')),
                 catchError(this.handleError<Task[]>('getTasks', []))
@@ -33,7 +34,7 @@ export class TaskService {
     /** GET task by id. Return `undefined` when id not found */
     getTaskNo404<Data>(id: number): Observable<Task> {
         const url = `${this.tasksUrl}/?id=${id}`;
-        return this.http.get<Task[]>(url)
+        return this.http.get<Task[]>(url, httpOptions )
             .pipe(
                 map(tasks => tasks[0]), // returns a {0|1} element array
                 tap(h => {
@@ -47,7 +48,7 @@ export class TaskService {
     /** GET task by id. Will 404 if id not found */
     getTask(id: number): Observable<Task> {
         const url = `${this.tasksUrl}/${id}`;
-        return this.http.get<Task>(url).pipe(
+        return this.http.get<Task>(url, httpOptions ).pipe(
             tap(_ => this.log(`fetched task id=${id}`)),
             catchError(this.handleError<Task>(`getTask id=${id}`))
         );
@@ -59,7 +60,7 @@ export class TaskService {
             // if not search term, return empty task array.
             return of([]);
         }
-        return this.http.get<Task[]>(`${this.tasksUrl}/?description=${term}`).pipe(
+        return this.http.get<Task[]>(`${this.tasksUrl}/?description=${term}`, httpOptions ).pipe(
             tap(_ => this.log(`found tasks matching "${term}"`)),
             catchError(this.handleError<Task[]>('searchTasks', []))
         );
@@ -88,7 +89,7 @@ export class TaskService {
 
     /** PUT: update the task on the server */
     updateTask(task: Task): Observable<any> {
-        return this.http.put(this.tasksUrl, task, httpOptions).pipe(
+        return this.http.put(this.tasksUrl + '/' + task.id, task, httpOptions).pipe(
             tap(_ => this.log(`updated task id=${task.id}`)),
             catchError(this.handleError<any>('updateTask'))
         );
