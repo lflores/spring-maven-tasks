@@ -1,15 +1,17 @@
 import {async, TestBed} from '@angular/core/testing';
 import {RouterTestingModule} from '@angular/router/testing';
 import {AppComponent} from './app.component';
+import {MessagesComponent} from './messages/messages.component';
 
 describe('AppComponent', () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             imports: [
-                RouterTestingModule
+                RouterTestingModule,
             ],
             declarations: [
-                AppComponent
+                AppComponent,
+                MessagesComponent
             ],
         }).compileComponents();
     }));
@@ -20,16 +22,16 @@ describe('AppComponent', () => {
         expect(app).toBeTruthy();
     });
 
-    it(`should have as title 'task-ui'`, () => {
+    it(`should have as title 'Tour of Tasks'`, () => {
         const fixture = TestBed.createComponent(AppComponent);
         const app = fixture.debugElement.componentInstance;
-        expect(app.title).toEqual('task-ui');
+        expect(app.title).toEqual('Tour of Tasks');
     });
 
     it('should render title in a h1 tag', () => {
         const fixture = TestBed.createComponent(AppComponent);
         fixture.detectChanges();
         const compiled = fixture.debugElement.nativeElement;
-        expect(compiled.querySelector('h1').textContent).toContain('Welcome to task-ui!');
+        expect(compiled.querySelector('h1').textContent).toContain('Tour of Tasks');
     });
 });

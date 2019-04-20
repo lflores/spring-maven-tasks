@@ -22,7 +22,7 @@ import {TaskSearchComponent} from './task-search/task-search.component';
         BrowserModule,
         FormsModule,
         AppRoutingModule,
-        HttpClientModule,
+        HttpClientModule
 
         // The HttpClientInMemoryWebApiModule module intercepts HTTP requests
         // and returns simulated server responses.
