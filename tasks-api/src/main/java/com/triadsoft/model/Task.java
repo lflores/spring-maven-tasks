@@ -1,9 +1,6 @@
 package com.triadsoft.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 /**
  * @author triad <leonardo.flores@xcaleconsulting.com>
@@ -16,7 +13,7 @@ public class Task {
     private Integer id;
     private String description;
     private String image;
-    private Boolean resolved;
+    private String status;
 
     public Task() {
     }
@@ -42,12 +39,12 @@ public class Task {
         this.description = description;
     }
 
-    public Boolean getResolved() {
-        return resolved;
+    public String getStatus() {
+        return status;
     }
 
-    public void setResolved(Boolean resolved) {
-        this.resolved = resolved;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public String getImage() {

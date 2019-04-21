@@ -1,5 +1,6 @@
 package com.triadsoft.api;
 
+import com.triadsoft.api.model.TaskCreate;
 import com.triadsoft.api.model.TaskUpdate;
 import com.triadsoft.model.Task;
 import com.triadsoft.services.TaskService;
@@ -27,6 +28,7 @@ import java.util.List;
         consumes = MediaType.APPLICATION_JSON_VALUE,
         produces = MediaType.APPLICATION_JSON_VALUE
 )
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 public class TaskController {
     @Autowired
@@ -37,14 +39,14 @@ public class TaskController {
             @And({
                     @Spec(path = "description", spec = LikeIgnoreCase.class),
                     @Spec(path = "image", spec = LikeIgnoreCase.class),
-                    @Spec(path = "resolved", spec = Equal.class)
+                    @Spec(path = "status", spec = Equal.class)
             }) Specification<Task> taskSpecification) {
         Iterable<Task> tasks = taskService.getTasks(taskSpecification);
         return new ResponseEntity(tasks, HttpStatus.OK);
     }
 
     @PostMapping
-    public ResponseEntity<Task> addTask(@RequestBody Task task) {
+    public ResponseEntity<Task> addTask(@RequestBody TaskCreate task) {
         return new ResponseEntity<>(taskService.addTask(task), HttpStatus.CREATED);
     }
 

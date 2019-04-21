@@ -100,7 +100,7 @@ public class TasksControllerTests {
     @Test
     public void paramResolvedShouldReturnTailoredMessage() throws Exception {
         this.mockMvc.perform(get("/tasks").contentType(MediaType.APPLICATION_JSON_VALUE)
-                .param("resolved", "true"))
+                .param("status", "resolved"))
                 .andDo(print()).andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(1)))
                 .andExpect(jsonPath("$[0].description").value("Task2"));
@@ -112,7 +112,7 @@ public class TasksControllerTests {
         //ver data.sql
         this.mockMvc.perform(get("/tasks").contentType(MediaType.APPLICATION_JSON_VALUE)
                 .param("description", "task2")
-                .param("resolved", "true"))
+                .param("status", "resolved"))
                 .andDo(print()).andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(1)))
                 .andExpect(jsonPath("$[0].description").value("Task2"));
@@ -125,7 +125,7 @@ public class TasksControllerTests {
         this.mockMvc.perform(get("/tasks")
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
                 .param("description", "Task2")
-                .param("resolved", "false"))
+                .param("status", "todo"))
                 .andDo(print()).andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(0)));
     }
@@ -142,7 +142,7 @@ public class TasksControllerTests {
                     .content(mapper.writeValueAsString(task)))
                 .andDo(print()).andExpect(status().isCreated())
                 .andExpect(jsonPath("$.description").value("New Task"))
-                .andExpect(jsonPath("$.resolved").isEmpty())
+                .andExpect(jsonPath("$.status").value("todo"))
                 .andExpect(jsonPath("$.image").value("mynewimage.gif"))
         ;
     }
@@ -151,7 +151,6 @@ public class TasksControllerTests {
     public void addTaskWithResolvedTrueAndWithoutImage() throws Exception {
         Task task = new Task();
         task.setDescription("New Task");
-        task.setResolved(true);
         ObjectMapper mapper = new ObjectMapper();
         this.mockMvc.perform(
                 post("/tasks")
@@ -159,7 +158,7 @@ public class TasksControllerTests {
                         .content(mapper.writeValueAsString(task)))
                 .andDo(print()).andExpect(status().isCreated())
                 .andExpect(jsonPath("$.description").value("New Task"))
-                .andExpect(jsonPath("$.resolved").value("true"))
+                .andExpect(jsonPath("$.status").value("todo"))
                 .andExpect(jsonPath("$.image").isEmpty())
         ;
     }
@@ -175,8 +174,8 @@ public class TasksControllerTests {
                         .content(mapper.writeValueAsString(task)))
                 .andDo(print()).andExpect(status().isOk())
                 .andExpect(jsonPath("$.description").value("Task1 Updated"))
-                .andExpect(jsonPath("$.resolved").value("true"))
-                .andExpect(jsonPath("$.image").value("myimage.gif"))
+                .andExpect(jsonPath("$.status").value("todo"))
+                .andExpect(jsonPath("$.image").value("images/myimage.gif"))
         ;
     }
 
@@ -198,7 +197,7 @@ public class TasksControllerTests {
     @Test
     public void updateTaskWithOnlyStatus() throws Exception {
         TaskUpdate task = new TaskUpdate();
-        task.setResolved(true);
+        task.setStatus("resolved");
         ObjectMapper mapper = new ObjectMapper();
         this.mockMvc.perform(
                 put("/tasks/1")
@@ -206,7 +205,7 @@ public class TasksControllerTests {
                         .content(mapper.writeValueAsString(task)))
                 .andDo(print()).andExpect(status().isOk())
                 //debe tener el distinto estado que el test anterior
-                .andExpect(jsonPath("$.resolved").value("true"))
+                .andExpect(jsonPath("$.status").value("resolved"))
         ;
     }
 }

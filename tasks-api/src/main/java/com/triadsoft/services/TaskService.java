@@ -3,6 +3,7 @@ package com.triadsoft.services;/**
  * Created 15/04/19 18:13
  */
 
+import com.triadsoft.api.model.TaskCreate;
 import com.triadsoft.api.model.TaskUpdate;
 import com.triadsoft.exceptions.ResourceNotFoundException;
 import com.triadsoft.model.Task;
@@ -24,7 +25,17 @@ public class TaskService {
     TaskRepository taskRepository;
 
 
-    public Task addTask(Task task) {
+    public Task addTask(TaskCreate taskCreate) {
+        Task task = new Task();
+
+        //TODO: Mejorar con converter
+        if(!Objects.isNull(taskCreate.getDescription())){
+            task.setDescription(taskCreate.getDescription());
+        }
+        if(!Objects.isNull(taskCreate.getImage())){
+            task.setImage(taskCreate.getImage());
+        }
+        task.setStatus("todo");
         return taskRepository.save(task);
     }
 
@@ -41,8 +52,8 @@ public class TaskService {
         if(!Objects.isNull(update.getImage())){
             task.setImage(update.getImage());
         }
-        if(!Objects.isNull(update.getResolved())){
-            task.setResolved(update.getResolved());
+        if(!Objects.isNull(update.getStatus())){
+            task.setStatus(update.getStatus());
         }
         return taskRepository.save(task);
     }
