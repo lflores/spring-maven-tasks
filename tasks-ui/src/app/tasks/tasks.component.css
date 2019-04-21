@@ -51,6 +51,10 @@
     border-radius: 4px 0 0 4px;
 }
 
+.tasks .badge.resolved {
+    background-color: darkgreen;
+}
+
 button {
     background-color: #eee;
     border: none;

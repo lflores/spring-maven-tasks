@@ -2,7 +2,7 @@
 <div class="grid grid-pad">
     <a *ngFor="let task of tasks" class="col-1-4"
        routerLink="/detail/{{task.id}}">
-        <div class="module task">
+        <div class="module task {{task.status}}">
             <h4>{{task.description}}</h4>
         </div>
     </a>
