@@ -19,6 +19,6 @@ export class DashboardComponent implements OnInit {
 
     getTasks(): void {
         this.taskService.getTasks()
-            .subscribe(tasks => this.tasks = tasks.slice(1, 5));
+            .subscribe(tasks => this.tasks = tasks.slice(0, 4));
     }
 }
