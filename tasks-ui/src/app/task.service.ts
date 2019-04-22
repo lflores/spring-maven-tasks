@@ -54,6 +54,15 @@ export class TaskService {
         );
     }
 
+    /** GET task by status. Will 404 if id not found */
+    getTasksByStatus(status: string): Observable<Task[]> {
+        const url = `${this.tasksUrl}/?status=`+status;
+        return this.http.get<Task[]>(url, httpOptions ).pipe(
+            tap(_ => this.log(`fetched tasks by status`)),
+            catchError(this.handleError<Task[]>('getTasks', []))
+        );
+    }
+
     /* GET tasks whose description contains search term */
     searchTasks(term: string): Observable<Task[]> {
         if (!term.trim()) {
