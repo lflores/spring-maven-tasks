@@ -1,19 +1,39 @@
-<div *ngIf="task">
-    <h2>{{task.description | uppercase}} Details</h2>
-    <div><span>id: </span>{{task.id}}</div>
-    <div>
-        <label>description:
-            <input [(ngModel)]="task.description" placeholder="description"/>
-        </label></div>
-    <div>
-        <label>image:
-            <input [(ngModel)]="task.image" placeholder="image"/>
-        </label></div>
-    <div>
-        <label>status:
-            <input [(ngModel)]="task.status" placeholder="todo"/>
-        </label>
-    </div>
-    <button (click)="goBack()">go back</button>
-    <button (click)="save()">save</button>
-</div>
+<mat-card *ngIf="task">
+    <mat-card-header>
+        <mat-card-title>{{task.description | uppercase}} Details</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <div>
+            <mat-form-field>
+                <input matInput placeholder="Id" value="{{task.id}}" disabled>
+            </mat-form-field>
+        </div>
+        <div>
+            <mat-form-field>
+                <input matInput [(ngModel)]="task.description" placeholder="Description"/>
+            </mat-form-field>
+        </div>
+        <div>
+            <mat-form-field>
+                <input matInput [(ngModel)]="task.image" placeholder="Image"/>
+            </mat-form-field>
+        </div>
+        <div>
+            <mat-radio-group name="status" [(ngModel)]="task.status" class="radio-group">
+                <mat-radio-button *ngFor="let status of statuses" name="status" class="radio-button" value="{{status}}">
+                    {{status}}
+                </mat-radio-button>
+            </mat-radio-group>
+        </div>
+        <mat-card-actions>
+            <button mat-raised-button (click)="goBack()">
+                <mat-icon>home</mat-icon>
+                Go Back
+            </button>
+            <button mat-raised-button color="primary" (click)="save()">
+                <mat-icon>save</mat-icon>
+                Save
+            </button>
+        </mat-card-actions>
+    </mat-card-content>
+</mat-card>

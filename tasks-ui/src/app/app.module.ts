@@ -17,12 +17,30 @@ import {TaskDetailComponent} from './task-detail/task-detail.component';
 import {TasksComponent} from './tasks/tasks.component';
 import {TaskSearchComponent} from './task-search/task-search.component';
 
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {MatButtonModule, MatIconModule,MatCheckboxModule} from '@angular/material';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatInputModule} from '@angular/material';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatCardModule} from '@angular/material/card';
+import {MatRadioModule} from '@angular/material/radio';
+
+
 @NgModule({
     imports: [
         BrowserModule,
         FormsModule,
         AppRoutingModule,
-        HttpClientModule
+        BrowserAnimationsModule,
+        MatButtonModule,
+        MatInputModule,
+        MatIconModule,
+        MatCheckboxModule,
+        MatToolbarModule,
+        MatFormFieldModule,
+        HttpClientModule,
+        MatRadioModule,
+        MatCardModule
 
         // The HttpClientInMemoryWebApiModule module intercepts HTTP requests
         // and returns simulated server responses.
@@ -30,6 +48,10 @@ import {TaskSearchComponent} from './task-search/task-search.component';
         // HttpClientInMemoryWebApiModule.forRoot(
             // InMemoryDataService, {dataEncapsulation: false}
         // )
+    ],
+    exports: [
+        MatButtonModule, MatCheckboxModule, MatIconModule,MatToolbarModule,MatFormFieldModule,MatInputModule,
+        MatCardModule,MatRadioModule
     ],
     declarations: [
         AppComponent,
