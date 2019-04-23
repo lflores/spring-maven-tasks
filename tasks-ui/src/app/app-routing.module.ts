@@ -9,7 +9,7 @@ import {MatButtonModule, MatCheckboxModule} from '@angular/material';
 import {ScrumBoardComponent} from './scrum-board/scrum-board.component';
 
 const routes: Routes = [
-    {path: '', redirectTo: '/dashboard', pathMatch: 'full'},
+    {path: '', redirectTo: '/scrum', pathMatch: 'full'},
     {path: 'dashboard', component: DashboardComponent},
     {path: 'scrum', component: ScrumBoardComponent},
     {path: 'detail/:id', component: TaskDetailComponent},
