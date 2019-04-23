@@ -16,6 +16,7 @@ import {MessagesComponent} from './messages/messages.component';
 import {TaskDetailComponent} from './task-detail/task-detail.component';
 import {TasksComponent} from './tasks/tasks.component';
 import {TaskSearchComponent} from './task-search/task-search.component';
+import {ScrumBoardComponent} from './scrum-board/scrum-board.component';
 
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatButtonModule, MatIconModule,MatCheckboxModule} from '@angular/material';
@@ -24,6 +25,8 @@ import {MatInputModule} from '@angular/material';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatCardModule} from '@angular/material/card';
 import {MatRadioModule} from '@angular/material/radio';
+import {DragDropModule} from '@angular/cdk/drag-drop';
+import {MatBadgeModule} from '@angular/material/badge';
 
 
 @NgModule({
@@ -40,7 +43,9 @@ import {MatRadioModule} from '@angular/material/radio';
         MatFormFieldModule,
         HttpClientModule,
         MatRadioModule,
-        MatCardModule
+        MatCardModule,
+        DragDropModule,
+        MatBadgeModule
 
         // The HttpClientInMemoryWebApiModule module intercepts HTTP requests
         // and returns simulated server responses.
@@ -59,7 +64,8 @@ import {MatRadioModule} from '@angular/material/radio';
         MessagesComponent,
         TasksComponent,
         TaskDetailComponent,
-        TaskSearchComponent
+        TaskSearchComponent,
+        ScrumBoardComponent
     ],
     bootstrap: [AppComponent]
 })
