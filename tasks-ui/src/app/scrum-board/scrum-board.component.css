@@ -61,7 +61,7 @@ mat-card-content img {
     margin: 0 -16px 16px -10px;
 }
 
-mat-card-header > mat-icon{
+mat-card-header > mat-icon {
     animation-name: fade-empty;
     animation-duration: 300ms;
     animation-iteration-count: infinite;
@@ -76,6 +76,22 @@ mat-card-header > mat-icon{
         opacity: 0.7;
     }
 }
+
+mat-card-header .mat-icon-button.edit {
+    /*border: 1px red dashed;*/
+    width: 25px;
+    height: 25px;
+    line-height: 10px;
+}
+
+mat-card-header .mat-icon-button.edit mat-icon.mat-icon {
+    /*border: 1px darkgreen dashed;*/
+    font-size: 14pt;
+    height: 16px;
+    width: 16px;
+    line-height: 20px;
+}
+
 
 .cdk-drag-preview {
     box-sizing: border-box;

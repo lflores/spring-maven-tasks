@@ -1,6 +1,6 @@
 <div class="scrum-container" >
     <h2><mat-icon>all_inbox</mat-icon>&nbsp;<span matBadge="{{todo.length}}" matBadgeOverlap="false">To Do</span>
-        <button mat-icon-button (click)="addTask()"><mat-icon>add</mat-icon></button>
+        <button mat-icon-button (click)="openAddDialog()"><mat-icon>add</mat-icon></button>
     </h2>
         <div id="todo"
             cdkDropList
@@ -13,11 +13,11 @@
             <mat-card-header>
                 <mat-icon [style.visibility]="item.changed ?'visible':'hidden'">save</mat-icon>
                 <mat-card-subtitle>{{item.description}}</mat-card-subtitle>
-                <button mat-icon-button><mat-icon>edit</mat-icon></button>
+                <button mat-icon-button class="edit" color="primary" (click)="editTask(item)"><mat-icon>edit</mat-icon></button>
             </mat-card-header>
-            <mat-card-content>
-                <img mat-card-image src="../assets/no-image.jpg" alt="Photo of a Shiba Inu">
-            </mat-card-content>
+<!--            <mat-card-content>-->
+<!--                <img mat-card-image src="../assets/no-image.jpg" alt="Photo of a Shiba Inu">-->
+<!--            </mat-card-content>-->
         </mat-card>
     </div>
 </div>
@@ -35,9 +35,9 @@
                 <mat-icon [style.visibility]="item.changed ?'visible':'hidden'">save</mat-icon>
                 <mat-card-subtitle>{{item.description}}</mat-card-subtitle>
             </mat-card-header>
-            <mat-card-content>
-                <img mat-card-image src="../assets/no-image.jpg" alt="Photo of a Shiba Inu">
-            </mat-card-content>
+<!--            <mat-card-content>-->
+<!--                <img mat-card-image src="../assets/no-image.jpg" alt="Photo of a Shiba Inu">-->
+<!--            </mat-card-content>-->
         </mat-card>
     </div>
 </div>
@@ -55,9 +55,9 @@
                 <mat-icon [style.visibility]="item.changed ?'visible':'hidden'">save</mat-icon>
                 <mat-card-subtitle>{{item.description}}</mat-card-subtitle>
             </mat-card-header>
-            <mat-card-content>
-                <img mat-card-image src="../assets/no-image.jpg" alt="Photo of a Shiba Inu">
-            </mat-card-content>
+<!--            <mat-card-content>-->
+<!--                <img mat-card-image src="../assets/no-image.jpg" alt="Photo of a Shiba Inu">-->
+<!--            </mat-card-content>-->
         </mat-card>
     </div>
 </div>
