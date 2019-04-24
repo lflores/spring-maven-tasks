@@ -27,6 +27,7 @@ import {MatCardModule} from '@angular/material/card';
 import {MatRadioModule} from '@angular/material/radio';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import {MatBadgeModule} from '@angular/material/badge';
+import { TaskAddComponent } from './task-add/task-add.component';
 
 
 @NgModule({
@@ -65,7 +66,8 @@ import {MatBadgeModule} from '@angular/material/badge';
         TasksComponent,
         TaskDetailComponent,
         TaskSearchComponent,
-        ScrumBoardComponent
+        ScrumBoardComponent,
+        TaskAddComponent
     ],
     bootstrap: [AppComponent]
 })

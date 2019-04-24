@@ -12,7 +12,7 @@ import {TaskService} from '../task.service';
 })
 export class TaskDetailComponent implements OnInit {
     @Input() task: Task;
-    statuses: string[] = ['todo', 'in-progress', 'resolved'];
+    statuses: string[] = ['todo', 'in-progress', 'done'];
     compareFn: ((f1: any, f2: any) => boolean) | null = this.compareByValue;
     compareByValue(f1: any, f2: any) {
         return f1 && f2 && f1.value === f2.value;

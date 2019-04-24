@@ -1,15 +1,5 @@
 <h2>Tasks ToDo</h2>
-
-<div>
-  <label>Task Description:
-    <input #taskDescription />
-  </label>
-  <!-- (click) passes input value to add() and then clears the input -->
-  <button (click)="add(taskDescription.value); taskDescription.value=''">
-    add
-  </button>
-</div>
-
+<app-task-add></app-task-add>
 <ul class="tasks">
   <li *ngFor="let task of tasks">
     <a routerLink="/detail/{{task.id}}">
