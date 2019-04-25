@@ -12,11 +12,7 @@ import {TaskService} from '../task.service';
 })
 export class TaskDetailComponent implements OnInit {
     @Input() task: Task;
-    statuses: string[] = ['todo', 'in-progress', 'resolved'];
-    compareFn: ((f1: any, f2: any) => boolean) | null = this.compareByValue;
-    compareByValue(f1: any, f2: any) {
-        return f1 && f2 && f1.value === f2.value;
-    }
+    statuses: string[] = ['todo', 'in-progress', 'done'];
 
     constructor(
         private route: ActivatedRoute,
@@ -41,6 +37,6 @@ export class TaskDetailComponent implements OnInit {
 
     save(): void {
         this.taskService.updateTask(this.task)
-            .subscribe(() => this.goBack());
+            .subscribe(() => window.location.href="/scrum");
     }
 }
