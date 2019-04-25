@@ -130,7 +130,7 @@ export class ScrumBoardComponent implements OnInit {
 export class DialogAddTask {
     constructor(
         public dialogRef: MatDialogRef<DialogAddTask>,
-        @Inject(MAT_DIALOG_DATA) public data: DialogData) {
+        @Inject(MAT_DIALOG_DATA) public task: Task) {
     }
 
     onNoClick(): void {
@@ -145,7 +145,7 @@ export class DialogAddTask {
 export class DialogEditTask {
     constructor(
         public dialogRef: MatDialogRef<DialogEditTask>,
-        @Inject(MAT_DIALOG_DATA) public task: DialogData) {
+        @Inject(MAT_DIALOG_DATA) public task: Task) {
     }
 
     onNoClick(): void {
