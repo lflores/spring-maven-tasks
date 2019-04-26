@@ -1,9 +1,9 @@
 -- @created triad
 --Para precargar datos de prueba
 select * from tasks;
-insert into tasks (description,status,image) values('Task1','todo', 'images/myimage.gif');
-insert into tasks (description,status,image) values('Task2', 'resolved', null);
-insert into tasks (description,status,image) values('Task3','todo', 'images/my-default.gif');
-insert into tasks (description,status,image) values('Task4','todo', 'default1.gif');
-insert into tasks (description,status,image) values('Task5','todo', null);
-insert into tasks (description,status,image) values('Task6','todo', 'default2.gif');
+insert into tasks (description,status) values('Task1','todo');
+insert into tasks (description,status) values('Task2','resolved');
+insert into tasks (description,status) values('Task3','in-progress');
+insert into tasks (description,status) values('Task4','todo');
+insert into tasks (description,status) values('Task5','todo');
+insert into tasks (description,status) values('Task6','todo');

@@ -63,9 +63,9 @@ export class ScrumBoardComponent implements OnInit {
             if (!result) {
                 return;
             }
-            this.description = result;
             let task: Task = new Task();
-            task.description = this.description;
+            task.description = result.description;
+            task.image = result.image;
             task.status = 'todo';
             this.taskService.addTask(task).subscribe(task => {
                 this.description = null;
@@ -128,9 +128,22 @@ export class ScrumBoardComponent implements OnInit {
     templateUrl: 'dialog-add-task.html',
 })
 export class DialogAddTask {
+    imageName: string;
     constructor(
         public dialogRef: MatDialogRef<DialogAddTask>,
-        @Inject(MAT_DIALOG_DATA) public task: Task) {
+        @Inject(MAT_DIALOG_DATA) public task: Task,
+        public taskService:TaskService) {
+    }
+
+    selectFile(file: File): void {
+        this.taskService.uploadImage(file)
+            .subscribe(imageFile =>
+                this.task.image = imageFile.fileDownloadUri
+            );
+    }
+
+    add(): void {
+        this.dialogRef.close(this.task);
     }
 
     onNoClick(): void {
