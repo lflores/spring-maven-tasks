@@ -25,8 +25,8 @@ import java.util.stream.Collectors;
  */
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
-public class FileController {
-    private static final Logger logger = LoggerFactory.getLogger(FileController.class);
+public class FileUploadController {
+    private static final Logger logger = LoggerFactory.getLogger(FileUploadController.class);
 
     @Autowired
     private FileStorageService fileStorageService;

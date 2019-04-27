@@ -11,6 +11,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -34,6 +35,15 @@ public class FileStorageService {
             Files.createDirectories(this.fileStorageLocation);
         } catch (Exception ex) {
             throw new FileStorageException("Could not create the directory where the uploaded files will be stored.", ex);
+        }
+
+        //Agrego una imagen por default que será agregada a una tarea por default.
+        final InputStream inputStream = Thread.currentThread().getContextClassLoader().getResourceAsStream("diagram.png");
+        Path targetLocation = this.fileStorageLocation.resolve("diagram.png");
+        try {
+            Files.copy(inputStream, targetLocation, StandardCopyOption.REPLACE_EXISTING);
+        } catch (Exception ex) {
+            throw new FileStorageException("Could not create the file by default.", ex);
         }
     }
 
