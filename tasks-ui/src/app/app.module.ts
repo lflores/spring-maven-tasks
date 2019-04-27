@@ -16,7 +16,7 @@ import {MessagesComponent} from './messages/messages.component';
 import {TaskDetailComponent} from './task-detail/task-detail.component';
 import {TasksComponent} from './tasks/tasks.component';
 import {TaskSearchComponent} from './task-search/task-search.component';
-import {ScrumBoardComponent,DialogAddTask,DialogEditTask} from './scrum-board/scrum-board.component';
+import {ScrumBoardComponent} from './scrum-board/scrum-board.component';
 
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatButtonModule, MatIconModule,MatCheckboxModule} from '@angular/material';
@@ -27,8 +27,7 @@ import {MatCardModule} from '@angular/material/card';
 import {MatRadioModule} from '@angular/material/radio';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import {MatBadgeModule} from '@angular/material/badge';
-import { TaskAddComponent } from './task-add/task-add.component';
-import {MatDialogModule} from '@angular/material/dialog';
+
 
 @NgModule({
     imports: [
@@ -46,8 +45,7 @@ import {MatDialogModule} from '@angular/material/dialog';
         MatRadioModule,
         MatCardModule,
         DragDropModule,
-        MatBadgeModule,
-        MatDialogModule,
+        MatBadgeModule
 
         // The HttpClientInMemoryWebApiModule module intercepts HTTP requests
         // and returns simulated server responses.
@@ -56,7 +54,6 @@ import {MatDialogModule} from '@angular/material/dialog';
             // InMemoryDataService, {dataEncapsulation: false}
         // )
     ],
-    entryComponents: [DialogAddTask,DialogEditTask],
     exports: [
         MatButtonModule, MatCheckboxModule, MatIconModule,MatToolbarModule,MatFormFieldModule,MatInputModule,
         MatCardModule,MatRadioModule
@@ -68,9 +65,7 @@ import {MatDialogModule} from '@angular/material/dialog';
         TasksComponent,
         TaskDetailComponent,
         TaskSearchComponent,
-        ScrumBoardComponent,
-        TaskAddComponent,
-        DialogAddTask,DialogEditTask
+        ScrumBoardComponent
     ],
     bootstrap: [AppComponent]
 })
