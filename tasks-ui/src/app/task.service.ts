@@ -16,6 +16,7 @@ export class TaskService {
 
     // private tasksUrl = 'api/tasks';  // URL to web api
     private tasksUrl = 'http://localhost:8080/tasks';  // URL to web api
+    private uploadFileUrl = 'http://localhost:8080/uploadFile';  // URL to web api
 
     constructor(
         private http: HttpClient,
@@ -101,6 +102,16 @@ export class TaskService {
         return this.http.put(this.tasksUrl + '/' + task.id, task, httpOptions).pipe(
             tap(_ => this.log(`updated task id=${task.id}`)),
             catchError(this.handleError<any>('updateTask'))
+        );
+    }
+
+    /** POST: uploadImage to the server */
+    uploadImage(file:File): Observable<any> {
+        let fd = new FormData();
+        fd.append('file',file,file.name);
+        return this.http.post(this.uploadFileUrl,fd).pipe(
+            tap(_ => this.log(`uploaded image: `+file.name)),
+            catchError(this.handleError<any>('uploadImage'))
         );
     }
 

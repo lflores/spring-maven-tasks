@@ -1,47 +1,45 @@
-<div class="scrum-container">
-    <h2><mat-icon>all_inbox</mat-icon>&nbsp;<span matBadge="{{todo.length}}" matBadgeOverlap="false">To do</span></h2>
-    <div
+<div class="scrum-container" >
+    <h2><mat-icon>all_inbox</mat-icon>&nbsp;<span matBadge="{{todo.length}}" matBadgeOverlap="false">To Do</span>
+        <button mat-icon-button (click)="openAddDialog()"><mat-icon>add</mat-icon></button>
+    </h2>
+        <div id="todo"
             cdkDropList
             #todoList="cdkDropList"
             [cdkDropListData]="todo"
             [cdkDropListConnectedTo]="[doneList,inProgressList]"
             class="scrum-list"
             (cdkDropListDropped)="drop($event)">
-        <!--    <div class="example-box" *ngFor="let item of todo" cdkDrag>{{item}}</div>-->
         <mat-card class="example-box" *ngFor="let item of todo" cdkDrag>
             <mat-card-header>
-                <div mat-card-avatar class="example-header-image"></div>
+                <mat-icon [style.visibility]="item.changed ?'visible':'hidden'">save</mat-icon>
                 <mat-card-title>{{item.description}}</mat-card-title>
+                <button mat-icon-button class="edit" color="primary" (click)="editTask(item)"><mat-icon>edit</mat-icon></button>
             </mat-card-header>
-            <mat-card-content>
-                <img mat-card-image src="../assets/no-image.jpg" alt="Photo of a Shiba Inu">
-            </mat-card-content>
+            <img *ngIf="item.image" mat-card-image src="{{item.image}}" alt="{{item.image}}">
         </mat-card>
     </div>
 </div>
 <div class="scrum-container">
     <h2><mat-icon>cached</mat-icon>&nbsp;<span matBadge="{{inProgress.length}}" matBadgeOverlap="false">In Progress</span></h2>
-    <div
+    <div id="in-progress"
             cdkDropList
             #inProgressList="cdkDropList"
             [cdkDropListData]="inProgress"
             [cdkDropListConnectedTo]="[todoList,doneList]"
             class="scrum-list"
             (cdkDropListDropped)="drop($event)">
-        <mat-card class="example-box" *ngFor="let item of inProgress" cdkDrag>
-            <mat-card-header>
-                <div mat-card-avatar class="example-header-image"></div>
+        <mat-card *ngFor="let item of inProgress" cdkDrag>
+            <mat-card-header class="example-box">
+                <mat-icon [style.visibility]="item.changed ?'visible':'hidden'">save</mat-icon>
                 <mat-card-title>{{item.description}}</mat-card-title>
             </mat-card-header>
-            <mat-card-content>
-                <img mat-card-image src="../assets/no-image.jpg" alt="Photo of a Shiba Inu">
-            </mat-card-content>
+            <img *ngIf="item.image" mat-card-image src="{{item.image}}" alt="{{item.image}}">
         </mat-card>
     </div>
 </div>
 <div class="scrum-container">
     <h2><mat-icon>done</mat-icon>&nbsp;<span matBadge="{{done.length}}" matBadgeOverlap="false">Done</span></h2>
-    <div
+    <div id="done"
             cdkDropList
             #doneList="cdkDropList"
             [cdkDropListData]="done"
@@ -50,12 +48,10 @@
             (cdkDropListDropped)="drop($event)">
         <mat-card class="example-box" *ngFor="let item of done" cdkDrag>
             <mat-card-header>
-                <div mat-card-avatar class="example-header-image"></div>
+                <mat-icon [style.visibility]="item.changed ?'visible':'hidden'">save</mat-icon>
                 <mat-card-title>{{item.description}}</mat-card-title>
             </mat-card-header>
-            <mat-card-content>
-                <img mat-card-image src="../assets/no-image.jpg" alt="Photo of a Shiba Inu">
-            </mat-card-content>
+            <img *ngIf="item.image" mat-card-image src="{{item.image}}" alt="{{item.image}}">
         </mat-card>
     </div>
 </div>
