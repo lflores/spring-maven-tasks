@@ -12,14 +12,10 @@
         <mat-card class="example-box" *ngFor="let item of todo" cdkDrag>
             <mat-card-header>
                 <mat-icon [style.visibility]="item.changed ?'visible':'hidden'">save</mat-icon>
-                <mat-card-subtitle>{{item.description}}</mat-card-subtitle>
+                <mat-card-title>{{item.description}}</mat-card-title>
                 <button mat-icon-button class="edit" color="primary" (click)="editTask(item)"><mat-icon>edit</mat-icon></button>
             </mat-card-header>
-            <img *ngIf="!item.image" mat-card-image src="../assets/no-image.jpg" alt="Photo of a Shiba Inu">
             <img *ngIf="item.image" mat-card-image src="{{item.image}}" alt="{{item.image}}">
-<!--            <mat-card-content>-->
-<!--                <img mat-card-image src="../assets/no-image.jpg" alt="Photo of a Shiba Inu">-->
-<!--            </mat-card-content>-->
         </mat-card>
     </div>
 </div>
@@ -35,11 +31,9 @@
         <mat-card *ngFor="let item of inProgress" cdkDrag>
             <mat-card-header class="example-box">
                 <mat-icon [style.visibility]="item.changed ?'visible':'hidden'">save</mat-icon>
-                <mat-card-subtitle>{{item.description}}</mat-card-subtitle>
+                <mat-card-title>{{item.description}}</mat-card-title>
             </mat-card-header>
-<!--            <mat-card-content>-->
-<!--                <img mat-card-image src="../assets/no-image.jpg" alt="Photo of a Shiba Inu">-->
-<!--            </mat-card-content>-->
+            <img *ngIf="item.image" mat-card-image src="{{item.image}}" alt="{{item.image}}">
         </mat-card>
     </div>
 </div>
@@ -55,11 +49,9 @@
         <mat-card class="example-box" *ngFor="let item of done" cdkDrag>
             <mat-card-header>
                 <mat-icon [style.visibility]="item.changed ?'visible':'hidden'">save</mat-icon>
-                <mat-card-subtitle>{{item.description}}</mat-card-subtitle>
+                <mat-card-title>{{item.description}}</mat-card-title>
             </mat-card-header>
-<!--            <mat-card-content>-->
-<!--                <img mat-card-image src="../assets/no-image.jpg" alt="Photo of a Shiba Inu">-->
-<!--            </mat-card-content>-->
+            <img *ngIf="item.image" mat-card-image src="{{item.image}}" alt="{{item.image}}">
         </mat-card>
     </div>
 </div>

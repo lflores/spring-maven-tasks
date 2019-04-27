@@ -92,10 +92,13 @@ mat-card-header .mat-icon-button.edit mat-icon.mat-icon {
     line-height: 20px;
 }
 
-label.mat-button {
+.myapp-no-padding-dialog .mat-dialog-container {
     border: 1px dashed red!important;
 }
-label.mat-button:hover{
+.mat-dialog-content .mat-button {
+    border: 1px dashed red!important;
+}
+.mat-dialog-content label.mat-button:hover{
     background-color: #cfd8dc;
 }
 

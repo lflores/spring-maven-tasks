@@ -83,7 +83,8 @@ export class ScrumBoardComponent implements OnInit {
                 description: task.description,
                 image: task.image,
                 status: task.status
-            }
+            },
+            panelClass: "myapp-no-padding-dialog"
         });
 
         dialogRef.afterClosed().subscribe(result => {
