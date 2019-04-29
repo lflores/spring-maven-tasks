@@ -60,6 +60,9 @@ import {MatDialogModule} from "@angular/material/dialog";
         MatButtonModule, MatCheckboxModule, MatIconModule,MatToolbarModule,MatFormFieldModule,MatInputModule,
         MatCardModule,MatRadioModule
     ],
+    entryComponents:[
+        DialogAddTask,DialogEditTask
+    ],
     declarations: [
         AppComponent,
         DashboardComponent,

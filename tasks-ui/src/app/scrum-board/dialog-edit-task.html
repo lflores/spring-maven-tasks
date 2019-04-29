@@ -12,15 +12,15 @@
         <!--        <input #inputFile type="file" name="fileLoader" [style.display]="'none'">-->
         <!--    <button mat-button [(ngModel)]="task.image" for="uploadPicture">Import file</button>-->
         <br/>
-<!--        <label for="uploadPicture" class="mat-button">-->
-<!--            <mat-icon>add_a_photo</mat-icon>-->
-<!--        </label>-->
-<!--        <input type="file"-->
-<!--               id="uploadPicture"-->
-<!--               [style.display]="'none'"-->
-<!--               class="hidden-input"-->
-<!--               accept="image/jpeg, .jpeg, image/png, .png, image/jpeg, .jpg, image/gif, .gif"-->
-<!--               (change)="selectFile($event.target.files[0])">-->
+        <label for="uploadPicture" class="mat-button">
+            <mat-icon>add_a_photo</mat-icon>
+        </label>
+        <input type="file"
+               id="uploadPicture"
+               [style.display]="'none'"
+               class="hidden-input"
+               accept="image/jpeg, .jpeg, image/png, .png, image/jpeg, .jpg, image/gif, .gif"
+               (change)="selectFile($event.target.files[0])">
         <img *ngIf="task.image" src="{{task.image}}" [width]="200">
     </div>
     <div mat-dialog-actions>

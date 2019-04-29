@@ -1,30 +1,80 @@
 .scrum-container {
     width: 400px;
     max-width: 100%;
-    margin: 0 25px 25px 0;
+    margin: 5px 25px 25px 0;
     display: inline-block;
     vertical-align: top;
+    border: 1px gray solid !important;
+    border-radius: 10px;
+    padding: 0px 5px 0 5px;
 }
 
+.scrum-container > .mat-icon {
+    padding-left: 40%;
+    font-size: 50pt;
+    opacity: 0.2;
+}
+
+
 .scrum-list {
-    border: solid 1px #ccc;
+    /*border: solid 1px #ccc;*/
     min-height: 60px;
     background: white;
     border-radius: 4px;
     overflow: hidden;
     display: block;
+    margin-bottom: 5px;
+}
+
+.scrum-list:empty {
+    border: solid 1px #ccc;
+    background-color: transparent;
+    background-image: url("baseline_save_alt_black_18dp.png");
+    opacity: 0.3;
+    background-repeat: no-repeat;
+    background-size: 40px;
+    background-position: center;
+    animation-name: fade-empty;
+    animation-duration: 4s;
+}
+
+/* The fade empty animation */
+@keyframes fade-empty {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 0.3;
+    }
 }
 
 mat-card {
     padding: 20px 10px;
-    border-bottom: solid 1px #ccc;
+    border: solid 1px #ccc;
     color: rgba(0, 0, 0, 0.87);
     box-sizing: border-box;
+    margin-bottom: 5px;
 }
 
-mat-card img {
+mat-card-content img {
     width: calc(30% + 32px);
-    margin: 0 -16px 16px -16px;
+    margin: 0 -16px 16px -10px;
+}
+
+mat-card-header > mat-icon {
+    animation-name: fade-empty;
+    animation-duration: 300ms;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+@keyframes save-icon {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 0.7;
+    }
 }
 
 mat-card-header .mat-icon-button.edit {
@@ -42,14 +92,9 @@ mat-card-header .mat-icon-button.edit mat-icon.mat-icon {
     line-height: 20px;
 }
 
-.myapp-no-padding-dialog .mat-dialog-container {
-    border: 1px dashed red!important;
-}
-.mat-dialog-content .mat-button {
-    border: 1px dashed red!important;
-}
-.mat-dialog-content label.mat-button:hover{
-    background-color: #cfd8dc;
+.mat-card-image{
+    width: 40%;
+    margin: 0px;
 }
 
 
