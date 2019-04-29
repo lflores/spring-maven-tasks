@@ -3,12 +3,7 @@ import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag
 import {TaskService} from '../task.service';
 import {Task} from '../task';
 
-import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material';
-
-export interface DialogData {
-    animal: string;
-    name: string;
-}
+import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
 
 @Component({
     selector: 'app-scrum-board',
@@ -129,9 +124,8 @@ export class ScrumBoardComponent implements OnInit {
     templateUrl: 'dialog-add-task.html',
 })
 export class DialogAddTask {
-    imageName: string;
     constructor(
-        public dialogRef: MatDialogRef<DialogAddTask>,
+        public dialogRef: MatDialogRef<MatDialog>,
         @Inject(MAT_DIALOG_DATA) public task: Task,
         public taskService:TaskService) {
     }
@@ -158,7 +152,7 @@ export class DialogAddTask {
 })
 export class DialogEditTask {
     constructor(
-        public dialogRef: MatDialogRef<DialogEditTask>,
+        public dialogRef: MatDialogRef<MatDialog>,
         @Inject(MAT_DIALOG_DATA) public task: Task) {
     }
 

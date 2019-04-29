@@ -1,0 +1,33 @@
+<h1 mat-dialog-title>Add New Task</h1>
+<form>
+    <div mat-dialog-content>
+        <mat-form-field>
+            <input matInput name="description" [(ngModel)]="task.description" maxlength="250"
+                   placeholder="Task description" required>
+        </mat-form-field>
+        <!--        <div>-->
+        <!--            <button mat-button [(ngModel)]="task.image" (click)="inputFile.click()">Import file</button>-->
+        <!--            {{ inputFile.value }}-->
+        <!--        </div>-->
+        <!--        <input #inputFile type="file" name="fileLoader" [style.display]="'none'">-->
+        <!--    <button mat-button [(ngModel)]="task.image" for="uploadPicture">Import file</button>-->
+        <br/>
+<!--        <label for="uploadPicture" class="mat-button">-->
+<!--            <mat-icon>add_a_photo</mat-icon>-->
+<!--        </label>-->
+<!--        <input type="file"-->
+<!--               id="uploadPicture"-->
+<!--               [style.display]="'none'"-->
+<!--               class="hidden-input"-->
+<!--               accept="image/jpeg, .jpeg, image/png, .png, image/jpeg, .jpg, image/gif, .gif"-->
+<!--               (change)="selectFile($event.target.files[0])">-->
+        <img *ngIf="task.image" src="{{task.image}}" [width]="200">
+    </div>
+    <div mat-dialog-actions>
+        <button mat-button (click)="onNoClick()">No Thanks</button>
+        <button mat-button (click)="save()" cdkFocusInitial color="primary">
+            <mat-icon>save</mat-icon>
+            Save
+        </button>
+    </div>
+</form>
