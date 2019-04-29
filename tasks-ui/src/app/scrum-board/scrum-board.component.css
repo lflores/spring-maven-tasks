@@ -56,6 +56,18 @@ mat-card {
     margin-bottom: 5px;
 }
 
+mat-card.todo-card{
+    border-left: 3px red solid;
+}
+
+mat-card.in-progress-card{
+    border-left: 3px yellow solid;
+}
+
+mat-card.done-card{
+    border-left: 3px green solid;
+}
+
 mat-card-content img {
     width: calc(30% + 32px);
     margin: 0 -16px 16px -10px;
@@ -97,7 +109,6 @@ mat-card-header .mat-icon-button.edit mat-icon.mat-icon {
     margin: 0px;
 }
 
-
 .cdk-drag-preview {
     box-sizing: border-box;
     border-radius: 4px;
@@ -113,10 +124,6 @@ mat-card-header .mat-icon-button.edit mat-icon.mat-icon {
 .cdk-drag-animating {
     transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
 }
-
-/*.example-box:last-child {*/
-/*    border: none;*/
-/*}*/
 
 .scrum-list.cdk-drop-list-dragging .example-box:not(.cdk-drag-placeholder) {
     transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);

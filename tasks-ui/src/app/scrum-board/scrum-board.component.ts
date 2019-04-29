@@ -48,9 +48,10 @@ export class ScrumBoardComponent implements OnInit {
     }
 
     openAddDialog(): void {
-        const dialogRef = this.dialog.open(DialogAddTask, {
+        const dialogRef = this.dialog.open(DialogTask, {
             width: '450px',
-            data: {description: this.description}
+            data: {description: this.description},
+            panelClass: "task-dialog"
         });
         dialogRef.disableClose = true;
 
@@ -60,7 +61,7 @@ export class ScrumBoardComponent implements OnInit {
             }
             let task: Task = new Task();
             task.description = result.description;
-            task.image = result.image;
+            task.image = result.imag
             task.status = 'todo';
             this.taskService.addTask(task).subscribe(task => {
                 this.description = null;
@@ -72,14 +73,10 @@ export class ScrumBoardComponent implements OnInit {
 
     editTask(task: Task): void {
         this.task = task;
-        const dialogRef = this.dialog.open(DialogEditTask, {
+        const dialogRef = this.dialog.open(DialogTask, {
             width: '450px',
-            data: {
-                description: task.description,
-                image: task.image,
-                status: task.status
-            },
-            panelClass: "myapp-no-padding-dialog"
+            data: task,
+            panelClass: "task-dialog"
         });
 
         dialogRef.afterClosed().subscribe(result => {
@@ -120,14 +117,14 @@ export class ScrumBoardComponent implements OnInit {
 }
 
 @Component({
-    selector: 'dialog-add-task',
-    templateUrl: 'dialog-add-task.html',
+    selector: 'dialog-task',
+    templateUrl: 'dialog-task.html'
 })
-export class DialogAddTask {
+export class DialogTask {
     constructor(
-        public dialogRef: MatDialogRef<MatDialog>,
+        public dialogRef: MatDialogRef<DialogTask>,
         @Inject(MAT_DIALOG_DATA) public task: Task,
-        public taskService:TaskService) {
+        public taskService: TaskService) {
     }
 
     selectFile(file: File): void {
@@ -137,30 +134,17 @@ export class DialogAddTask {
             );
     }
 
-    add(): void {
+    openFile(event: any): void {
+        event.preventDefault();
+        let element:HTMLElement = document.getElementById("uploadPicture") as HTMLElement;
+        element.click();
+    }
+
+    close(): void {
         this.dialogRef.close(this.task);
     }
 
     onNoClick(): void {
         this.dialogRef.close();
-    }
-}
-
-@Component({
-    selector: 'dialog-edit-task',
-    templateUrl: 'dialog-edit-task.html',
-})
-export class DialogEditTask {
-    constructor(
-        public dialogRef: MatDialogRef<MatDialog>,
-        @Inject(MAT_DIALOG_DATA) public task: Task) {
-    }
-
-    onNoClick(): void {
-        this.dialogRef.close();
-    }
-
-    save(): void {
-        this.dialogRef.close(this.task);
     }
 }
