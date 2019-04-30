@@ -1,15 +1,15 @@
- /*@import "~@angular/material/prebuilt-themes/indigo-pink.css";*/
+/*@import "~@angular/material/prebuilt-themes/indigo-pink.css";*/
 @import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
 /* Master Styles */
 h1 {
     color: #369;
-    font-family: Roboto,"Helvetica Neue",sans-serif;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
     font-size: 250%;
 }
 
 h2, h3 {
     color: #444;
-    font-family: Roboto,"Helvetica Neue",sans-serif;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
     font-weight: lighter;
 }
 
@@ -19,7 +19,7 @@ body {
 
 body, input[text], button {
     color: #888;
-    font-family: Roboto,"Helvetica Neue",sans-serif;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
 a {
@@ -28,7 +28,7 @@ a {
 }
 
 button {
-    font-family: Roboto,"Helvetica Neue",sans-serif;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
     background-color: #eee;
     border: none;
     padding: 5px 10px;
@@ -45,6 +45,19 @@ button:disabled {
     background-color: #eee;
     color: #aaa;
     cursor: auto;
+}
+
+.task-dialog {
+    /*border: 1px red dashed !important;*/
+}
+
+.task-dialog label.mat-button:hover {
+    background-color: #cfd8dc;
+}
+
+.task-dialog mat-form-field{
+    /*border: 1px red dashed;*/
+    width: 380px;
 }
 
 /* Navigation link styles */

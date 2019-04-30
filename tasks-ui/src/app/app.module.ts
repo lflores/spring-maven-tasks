@@ -16,7 +16,7 @@ import {MessagesComponent} from './messages/messages.component';
 import {TaskDetailComponent} from './task-detail/task-detail.component';
 import {TasksComponent} from './tasks/tasks.component';
 import {TaskSearchComponent} from './task-search/task-search.component';
-import {ScrumBoardComponent,DialogAddTask,DialogEditTask} from './scrum-board/scrum-board.component';
+import {ScrumBoardComponent,DialogTask} from './scrum-board/scrum-board.component';
 
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatButtonModule, MatIconModule,MatCheckboxModule} from '@angular/material';
@@ -61,7 +61,7 @@ import {MatDialogModule} from "@angular/material/dialog";
         MatCardModule,MatRadioModule
     ],
     entryComponents:[
-        DialogAddTask,DialogEditTask
+        DialogTask
     ],
     declarations: [
         AppComponent,
@@ -71,8 +71,7 @@ import {MatDialogModule} from "@angular/material/dialog";
         TaskDetailComponent,
         TaskSearchComponent,
         ScrumBoardComponent,
-        DialogAddTask,
-        DialogEditTask
+        DialogTask
     ],
     bootstrap: [AppComponent]
 })
