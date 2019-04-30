@@ -61,7 +61,7 @@ export class ScrumBoardComponent implements OnInit {
             }
             let task: Task = new Task();
             task.description = result.description;
-            task.image = result.imag
+            task.image = result.image;
             task.status = 'todo';
             this.taskService.addTask(task).subscribe(task => {
                 this.description = null;
