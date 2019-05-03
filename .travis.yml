@@ -6,8 +6,7 @@ before_install:
   - sed -i.bak -e 's|https://nexus.codehaus.org/snapshots/|https://oss.sonatype.org/content/repositories/codehaus-snapshots/|g' ~/.m2/settings.xml
   - pip install awscli
   - export PATH=$PATH:$HOME/.local/bin
-  - mkdir -p ~/bin && curl -sSL -o ~/bin/jq https://github.com/stedolan/jq/releases/download/jq-1.5/jq-linux64 && chmod +x ~/bin/jq
-  - export PATH=$PATH:~/bin
+  - pip install jq
   - jq --version
 env:
   global:
