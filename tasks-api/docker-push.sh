@@ -7,7 +7,7 @@ REGISTRY_URL=${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com
 # this is most likely namespaced repo name like myorg/veryimportantimage
 SOURCE_IMAGE="${DOCKER_REPO}"
 # using it as there will be 2 versions published
-TARGET_IMAGE="${REGISTRY_URL}/tasks-api"
+TARGET_IMAGE="${REGISTRY_URL}/${ECS_APP_NAME}"
 # lets make sure we always have access to latest image
 TARGET_IMAGE_LATEST="${TARGET_IMAGE}:latest"
 TIMESTAMP=$(date '+%Y%m%d%H%M%S')
@@ -36,3 +36,18 @@ docker push ${TARGET_IMAGE_LATEST}
 # push new version
 docker tag ${SOURCE_IMAGE} ${TARGET_IMAGE_VERSIONED}
 docker push ${TARGET_IMAGE_VERSIONED}
+
+
+export ECS_TASK_FAMILY_NAME=${ECS_APP_NAME}-dev-tasks
+export ECS_CLUSTER_NAME=task-api-cluster
+export ECS_SERVICE_NAME=${ECS_APP_NAME}-service-dev
+
+export TASK_DEFINITION=$(aws ecs describe-task-definition --task-definition $ECS_TASK_FAMILY_NAME | jq ".taskDefinition.containerDefinitions[0].image = \"$TARGET_IMAGE_VERSIONED\"")
+# Extract container definitions from task definition.
+export CONTAINER_DEFINITION=$(echo $TASK_DEFINITION | jq --raw-output .taskDefinition.containerDefinitions)
+# Extract volumes form task definition
+export VOLUMES=$(echo $TASK_DEFINITION | jq --raw-output .taskDefinition.volumes)
+# Register task definition and get the new task version
+export TASK_VERSION=$(aws ecs register-task-definition --family $ECS_TASK_FAMILY_NAME --volumes "${VOLUMES}" --container-definitions "${CONTAINER_DEFINITION}" | jq --raw-output '.taskDefinition.revision')
+# Update the ECS service to use the updated Task version CAUTION: If you copy paste this block of code.. be aware of hardcoded service and cluster name
+aws ecs update-service --deployment-configuration "maximumPercent=100,minimumHealthyPercent=0"  --cluster $ECS_CLUSTER_NAME --service $ECS_SERVICE_NAME  --task-definition $ECS_TASK_FAMILY_NAME:$TASK_VERSION

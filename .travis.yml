@@ -5,10 +5,12 @@ jdk:
 before_install:
   - sed -i.bak -e 's|https://nexus.codehaus.org/snapshots/|https://oss.sonatype.org/content/repositories/codehaus-snapshots/|g' ~/.m2/settings.xml
   - pip install awscli
+  - apt-get install jq
   - export PATH=$PATH:$HOME/.local/bin
 env:
   global:
     - DOCKER_REPO=com.triadsoft/tasks-api
+    - ECS_APP_NAME=tasks-api
 script:
   #- ./mvnw clean verify -P${PROFILE:-ci}
   - cd tasks-api
