@@ -6,6 +6,7 @@ before_install:
   - sed -i.bak -e 's|https://nexus.codehaus.org/snapshots/|https://oss.sonatype.org/content/repositories/codehaus-snapshots/|g' ~/.m2/settings.xml
   - pip install awscli
   - export PATH=$PATH:$HOME/.local/bin
+  - jq --version
 env:
   global:
     - DOCKER_REPO=com.triadsoft/tasks-api

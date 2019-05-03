@@ -42,7 +42,13 @@ export ECS_TASK_FAMILY_NAME=${ECS_APP_NAME}-dev-tasks
 export ECS_CLUSTER_NAME=task-api-cluster
 export ECS_SERVICE_NAME=${ECS_APP_NAME}-service-dev
 
+echo "family: $ECS_TASK_FAMILY_NAME"
+echo "cluster: $ECS_CLUSTER_NAME"
+echo "service: $ECS_SERVICE_NAME"
+echo $TARGET_IMAGE_VERSIONED
+
 export TASK_DEFINITION=$(aws ecs describe-task-definition --task-definition $ECS_TASK_FAMILY_NAME | jq ".taskDefinition.containerDefinitions[0].image = \"$TARGET_IMAGE_VERSIONED\"")
+echo "task-definition: $TASK_DEFINITION"
 # Extract container definitions from task definition.
 export CONTAINER_DEFINITION=$(echo $TASK_DEFINITION | jq --raw-output .taskDefinition.containerDefinitions)
 # Extract volumes form task definition
