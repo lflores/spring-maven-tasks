@@ -18,8 +18,8 @@ script:
 deploy:
   provider: script
   script: bash docker-push.sh
-  on:
-    branch: develop
+#  on:
+#    branch: develop
 cache:
   directories:
     - '$HOME/.m2/repository'
