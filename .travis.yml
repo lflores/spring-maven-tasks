@@ -11,8 +11,8 @@ env:
     - DOCKER_REPO=com.triadsoft/tasks-api
 script:
   #- ./mvnw clean verify -P${PROFILE:-ci}
-  #- cd tasks-api
-  - ./tasks-api/mvnw install dockerfile:build
+  - cd tasks-api
+  - ./mvnw install dockerfile:build
 deploy:
   provider: script
   script: bash docker-push.sh
