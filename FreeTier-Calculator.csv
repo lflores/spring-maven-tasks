@@ -1,0 +1,44 @@
+Your Estimate
+Service Type,Components,Region,Component Price,Service Price
+Amazon EC2 Service (US East (N. Virginia)),,,,$23.42
+,Compute:,US East (N. Virginia),$20.36
+,EBS Volumes:,US East (N. Virginia),$3
+,EBS IOPS:,US East (N. Virginia),$0
+,EBS Snapshots:,US East (N. Virginia),$0.06
+Amazon S3 Service (US East (N. Virginia)),,,,$0.14
+,S3 Standard Storage:,US East (N. Virginia),$0.12
+,S3 Standard Put Requests:,US East (N. Virginia),$0.01
+,S3 Standard Other Requests:,US East (N. Virginia),$0.01
+Amazon RDS Service (US East (N. Virginia)),,,,$18.3
+,DB instances:,US East (N. Virginia),$18.3
+,Storage:,US East (N. Virginia),$0
+Amazon DynamoDB Service (US East (N. Virginia)),,,,$0
+,On-demand Capacity:,US East (N. Virginia),$0
+,Provisioned Capacity:,US East (N. Virginia),$0
+,Indexed Data Storage:,US East (N. Virginia),$0
+,DynamoDB Streams:,US East (N. Virginia),$0
+,On-demand backup:,US East (N. Virginia),$0
+,Continuous backup (PITR):,US East (N. Virginia),$0
+,Restoring a table:,US East (N. Virginia),$0
+Amazon ElastiCache Service (US East (N. Virginia)),,,,$16.11
+,On-Demand Cache Nodes:,US East (N. Virginia),$16.11
+Amazon CloudWatch Service (US East (N. Virginia)),,,,$0
+,Standard Alarms:,US East (N. Virginia),$0
+Amazon SNS Service (US East (N. Virginia)),,,,$0
+,Requests:,US East (N. Virginia),$0
+,Notifications:,US East (N. Virginia),$0
+Amazon SQS Service (US East (N. Virginia)),,,,$0
+,Requests - Standard Queue:,US East (N. Virginia),$0
+,Requests - FIFO Queue:,US East (N. Virginia),$0
+Amazon SWF Service (US East (N. Virginia)),,,,$0
+,Executions:,US East (N. Virginia),$0
+,Chargeable Actions:,US East (N. Virginia),$0
+,Workflow Days:,US East (N. Virginia),$0
+AWS Data Transfer In,,,,$0
+,US East (N. Virginia) Region:,Global,$0
+AWS Data Transfer Out,,,,$1.26
+,US East (N. Virginia) Region:,Global,$1.26
+AWS Support (Basic),,,,$0
+,Support for all AWS services:,,$0
+,,Free Tier Discount:,,$-59.23
+,,Total Monthly Payment:,,$0

@@ -8,7 +8,7 @@ before_install:
   - export PATH=$PATH:$HOME/.local/bin
 env:
   global:
-    - DOCKER_REPO=tasks-api
+    - DOCKER_REPO=com.triadsoft/tasks-api
 script:
   #- ./mvnw clean verify -P${PROFILE:-ci}
   - cd tasks-api

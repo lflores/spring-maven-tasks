@@ -7,7 +7,7 @@ REGISTRY_URL=${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com
 # this is most likely namespaced repo name like myorg/veryimportantimage
 SOURCE_IMAGE="${DOCKER_REPO}"
 # using it as there will be 2 versions published
-TARGET_IMAGE="${REGISTRY_URL}/${DOCKER_REPO}"
+TARGET_IMAGE="${REGISTRY_URL}/tasks-api"
 # lets make sure we always have access to latest image
 TARGET_IMAGE_LATEST="${TARGET_IMAGE}:latest"
 TIMESTAMP=$(date '+%Y%m%d%H%M%S')
