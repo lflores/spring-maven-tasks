@@ -45,7 +45,7 @@ export ECS_SERVICE_NAME=${ECS_APP_NAME}-service-dev
 echo "family: $ECS_TASK_FAMILY_NAME"
 echo "cluster: $ECS_CLUSTER_NAME"
 echo "service: $ECS_SERVICE_NAME"
-echo $TARGET_IMAGE_VERSIONED
+echo "target-image: $TARGET_IMAGE_VERSIONED"
 
 export TASK_DEFINITION=$(aws ecs describe-task-definition --task-definition $ECS_TASK_FAMILY_NAME | jq ".taskDefinition.containerDefinitions[0].image = \"$TARGET_IMAGE_VERSIONED\"")
 echo "task-definition: $TASK_DEFINITION"
