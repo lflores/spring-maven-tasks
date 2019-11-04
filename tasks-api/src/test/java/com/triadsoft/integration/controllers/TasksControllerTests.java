@@ -13,15 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.triadsoft;
+package com.triadsoft.integration.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.triadsoft.api.model.TaskUpdate;
 import com.triadsoft.model.Task;
-import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.junit.runners.MethodSorters;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -30,6 +28,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
+import static org.hamcrest.Matchers.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -42,7 +41,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
-//@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class TasksControllerTests {
 
     @Autowired
@@ -75,8 +73,12 @@ public class TasksControllerTests {
     public void getTaskByUnknownId() throws Exception {
         this.mockMvc.perform(get("/tasks/15")
                 .contentType(MediaType.APPLICATION_JSON_VALUE))
-                .andDo(print())
-                .andExpect(status().isNotFound());
+                //.andDo(print())
+                .andExpect(status().isNotFound())
+        .andExpect(jsonPath("$.status",is(404)))
+        .andExpect(jsonPath("$.error",is("Not Found")))
+        .andExpect(jsonPath("$.message",is("No se encontró la tarea con el id: 15")))
+        ;
     }
 
     @Test
@@ -85,7 +87,8 @@ public class TasksControllerTests {
                 .param("description", "deployment diagram"))
                 .andDo(print()).andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(1)))
-                .andExpect(jsonPath("$[0].description").value("Deployment Diagram"));
+                .andExpect(jsonPath("$[0].description")
+                        .value("Deployment Diagram"));
     }
 
     @Test
@@ -94,7 +97,8 @@ public class TasksControllerTests {
                 .param("image", "diagram.png"))
                 .andDo(print()).andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(1)))
-                .andExpect(jsonPath("$[0].description").value("Review Diagram"));
+                .andExpect(jsonPath("$[0].description")
+                        .value("Review Diagram"));
     }
 
     @Test
@@ -103,7 +107,8 @@ public class TasksControllerTests {
                 .param("status", "resolved"))
                 .andDo(print()).andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(1)))
-                .andExpect(jsonPath("$[0].description").value("Deployment Diagram"));
+                .andExpect(jsonPath("$[0].description")
+                        .value("Deployment Diagram"));
     }
 
     @Test
@@ -115,7 +120,8 @@ public class TasksControllerTests {
                 .param("status", "resolved"))
                 .andDo(print()).andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(1)))
-                .andExpect(jsonPath("$[0].description").value("Deployment Diagram"));
+                .andExpect(jsonPath("$[0].description")
+                        .value("Deployment Diagram"));
     }
 
     @Test
@@ -138,12 +144,15 @@ public class TasksControllerTests {
         ObjectMapper mapper = new ObjectMapper();
         this.mockMvc.perform(
                 post("/tasks")
-                    .contentType(MediaType.APPLICATION_JSON_VALUE)
-                    .content(mapper.writeValueAsString(task)))
+                        .contentType(MediaType.APPLICATION_JSON_VALUE)
+                        .content(mapper.writeValueAsString(task)))
                 .andDo(print()).andExpect(status().isCreated())
-                .andExpect(jsonPath("$.description").value("New Task"))
-                .andExpect(jsonPath("$.status").value("todo"))
-                .andExpect(jsonPath("$.image").value("mynewimage.gif"))
+                .andExpect(jsonPath("$.description")
+                        .value("New Task"))
+                .andExpect(jsonPath("$.status")
+                        .value("todo"))
+                .andExpect(jsonPath("$.image")
+                        .value("mynewimage.gif"))
         ;
     }
 
@@ -157,9 +166,12 @@ public class TasksControllerTests {
                         .contentType(MediaType.APPLICATION_JSON_VALUE)
                         .content(mapper.writeValueAsString(task)))
                 .andDo(print()).andExpect(status().isCreated())
-                .andExpect(jsonPath("$.description").value("New Task"))
-                .andExpect(jsonPath("$.status").value("todo"))
-                .andExpect(jsonPath("$.image").isEmpty())
+                .andExpect(jsonPath("$.description")
+                        .value("New Task"))
+                .andExpect(jsonPath("$.status")
+                        .value("todo"))
+                .andExpect(jsonPath("$.image")
+                        .isEmpty())
         ;
     }
 
@@ -167,6 +179,7 @@ public class TasksControllerTests {
     public void updateTaskWithOnlyDescription() throws Exception {
         TaskUpdate task = new TaskUpdate();
         task.setDescription("Task1 Updated");
+        task.setStatus("todo");
         ObjectMapper mapper = new ObjectMapper();
         this.mockMvc.perform(
                 put("/tasks/1")
@@ -175,7 +188,7 @@ public class TasksControllerTests {
                 .andDo(print()).andExpect(status().isOk())
                 .andExpect(jsonPath("$.description").value("Task1 Updated"))
                 .andExpect(jsonPath("$.status").value("todo"))
-                //.andExpect(jsonPath("$.image").value("images/myimage.gif"))
+        //.andExpect(jsonPath("$.image").value("images/myimage.gif"))
         ;
     }
 

@@ -6,13 +6,13 @@ package com.triadsoft.services;/**
 import com.triadsoft.api.model.TaskCreate;
 import com.triadsoft.api.model.TaskUpdate;
 import com.triadsoft.exceptions.ResourceNotFoundException;
+import com.triadsoft.mappers.TaskMapper;
 import com.triadsoft.model.Task;
 import com.triadsoft.repositories.TaskRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
-import java.util.Objects;
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -21,20 +21,17 @@ import java.util.Optional;
  */
 @Service
 public class TaskService {
-    @Autowired
-    TaskRepository taskRepository;
+    private final TaskRepository taskRepository;
+    private final TaskMapper taskMapper;
 
+    public TaskService(TaskRepository taskRepository, TaskMapper taskMapper) {
+        this.taskRepository = taskRepository;
+        this.taskMapper = taskMapper;
+    }
 
     public Task addTask(TaskCreate taskCreate) {
         Task task = new Task();
-
-        //TODO: Mejorar con converter
-        if(!Objects.isNull(taskCreate.getDescription())){
-            task.setDescription(taskCreate.getDescription());
-        }
-        if(!Objects.isNull(taskCreate.getImage())){
-            task.setImage(taskCreate.getImage());
-        }
+        taskMapper.mapTaskCreateToTask(taskCreate, task);
         task.setStatus("todo");
         return taskRepository.save(task);
     }
@@ -45,20 +42,11 @@ public class TaskService {
             throw new ResourceNotFoundException("La tarea con el id: " + id + " no existe");
         }
         Task task = optional.get();
-        //TODO: Mejorar con converter
-        if(!Objects.isNull(update.getDescription())){
-            task.setDescription(update.getDescription());
-        }
-        if(!Objects.isNull(update.getImage())){
-            task.setImage(update.getImage());
-        }
-        if(!Objects.isNull(update.getStatus())){
-            task.setStatus(update.getStatus());
-        }
+        taskMapper.mapTaskUpdateToTask(update, task);
         return taskRepository.save(task);
     }
 
-    public Iterable<Task> getTasks(Specification<Task> taskSpecification) {
+    public List<Task> getTasks(Specification<Task> taskSpecification) {
         return taskRepository.findAll(taskSpecification);
     }
 

@@ -5,12 +5,9 @@ import com.triadsoft.api.model.TaskUpdate;
 import com.triadsoft.model.Task;
 import com.triadsoft.services.TaskService;
 import net.kaczmarzyk.spring.data.jpa.domain.Equal;
-import net.kaczmarzyk.spring.data.jpa.domain.Like;
 import net.kaczmarzyk.spring.data.jpa.domain.LikeIgnoreCase;
 import net.kaczmarzyk.spring.data.jpa.web.annotation.And;
-import net.kaczmarzyk.spring.data.jpa.web.annotation.Or;
 import net.kaczmarzyk.spring.data.jpa.web.annotation.Spec;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -31,8 +28,11 @@ import java.util.List;
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
 public class TaskController {
-    @Autowired
-    TaskService taskService;
+    final TaskService taskService;
+
+    public TaskController(TaskService taskService) {
+        this.taskService = taskService;
+    }
 
     @GetMapping
     public ResponseEntity<List<Task>> tasks(
@@ -41,8 +41,7 @@ public class TaskController {
                     @Spec(path = "image", spec = LikeIgnoreCase.class),
                     @Spec(path = "status", spec = Equal.class)
             }) Specification<Task> taskSpecification) {
-        Iterable<Task> tasks = taskService.getTasks(taskSpecification);
-        return new ResponseEntity(tasks, HttpStatus.OK);
+        return new ResponseEntity<>(taskService.getTasks(taskSpecification), HttpStatus.OK);
     }
 
     @PostMapping
@@ -50,14 +49,14 @@ public class TaskController {
         return new ResponseEntity<>(taskService.addTask(task), HttpStatus.CREATED);
     }
 
-    @PutMapping(value="/{id}")
-    public ResponseEntity<Task> updateTask(@PathVariable Integer id,@RequestBody TaskUpdate task) {
-        return new ResponseEntity<>(taskService.updateTask(id,task), HttpStatus.OK);
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<Task> updateTask(@PathVariable Integer id, @RequestBody TaskUpdate task) {
+        return new ResponseEntity<>(taskService.updateTask(id, task), HttpStatus.OK);
     }
 
-    @GetMapping(value="/{id}")
+    @GetMapping(value = "/{id}")
     public ResponseEntity<Task> getTask(@PathVariable Integer id) {
-        return new ResponseEntity<Task>(taskService.findTask(id), HttpStatus.OK);
+        return new ResponseEntity<>(taskService.findTask(id), HttpStatus.OK);
     }
 
     @DeleteMapping(

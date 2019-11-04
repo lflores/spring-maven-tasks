@@ -1,6 +1,7 @@
 package com.triadsoft.model;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 /**
  * @author triad <leonardo.flores@xcaleconsulting.com>
@@ -53,5 +54,20 @@ public class Task {
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Task)) return false;
+        Task task = (Task) o;
+        return id.equals(task.id) &&
+                description.equals(task.description) &&
+                Objects.equals(status, task.status);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, description, status);
     }
 }

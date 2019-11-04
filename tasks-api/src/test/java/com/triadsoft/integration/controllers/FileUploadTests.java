@@ -1,4 +1,4 @@
-package com.triadsoft;
+package com.triadsoft.integration.controllers;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -36,7 +36,9 @@ public class FileUploadTests {
 
     @Test
     public void uploadOneFile() throws Exception {
-        final InputStream inputStream = Thread.currentThread().getContextClassLoader().getResourceAsStream("mate-grande.png");
+        final InputStream inputStream = Thread.currentThread()
+                .getContextClassLoader()
+                .getResourceAsStream("mate-grande.png");
         final MockMultipartFile avatar = new MockMultipartFile("file",
                 "mate-grande.png",
                 "image/png", inputStream);
