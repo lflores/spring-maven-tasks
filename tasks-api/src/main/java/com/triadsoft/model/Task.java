@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.Objects;
 
 /**
- * @author triad <leonardo.flores@xcaleconsulting.com>
+ * @author triad <flores.leonardo@gmail.com>
  * Created 16/04/19 17:32
  */
 @Entity(name = "tasks")

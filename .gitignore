@@ -3,3 +3,4 @@
 out/
 /task-api/task-api.iml
 task-ui/src/main/web/node/
+tasks-api/dummy-dir

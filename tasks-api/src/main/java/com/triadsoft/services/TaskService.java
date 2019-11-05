@@ -1,5 +1,5 @@
 package com.triadsoft.services;/**
- * @author triad <leonardo.flores@xcaleconsulting.com>
+ * @author triad <flores.leonardo@gmail.com>
  * Created 15/04/19 18:13
  */
 
@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * @author triad <leonardo.flores@xcaleconsulting.com>
+ * @author triad <flores.leonardo@gmail.com>
  * Created 15/04/19 18:13
  */
 @Service

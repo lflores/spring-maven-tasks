@@ -1,5 +1,5 @@
 package com.triadsoft.config;/**
- * @author triad <leonardo.flores@xcaleconsulting.com>
+ * @author triad <flores.leonardo@gmail.com>
  * Created 26/04/19 14:50
  */
 
