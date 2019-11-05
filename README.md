@@ -16,7 +16,7 @@ The technologies and techniques used for this fullstack project are:
 - Project statuses (badges that opens the project)
 
 # Project Overview
-This project has two parts one the REST API and the Angular frontend. 
+This project has two parts the REST API and the Angular frontend. 
 Based on the idea of the task dashboard and the Angular example Tour of Heroes the project explores some user experience concepts and tries to provide a useful user interface.
 The ui shows a dashboard called scrum, to handle the complete process of creation, edition, and change status of a To Do Task.
 
