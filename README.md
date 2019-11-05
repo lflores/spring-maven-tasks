@@ -11,9 +11,9 @@ The technologies and techniques used for this fullstack project are:
 - Maven (Sub projects integration, compilation, run tests)
 - Spring Boot (REST API)
 - Travis CI (Continuous Integration)
-- Sonar Cloud (Best Practices and Code enhancement)
-- TDD (Test Driven development)
-- Project statuses (badges)
+- Sonar Cloud ([Best Practices and Code enhancement](https://sonarcloud.io/component_measures?id=com.triadsoft:spring-maven-tasks))
+- Test Driven development (TDD)
+- Project statuses (badges that opens the project)
 
 # Project Overview
 This project has two parts one the REST API and the Angular frontend. 
