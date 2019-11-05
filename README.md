@@ -1,6 +1,6 @@
 [![Build Status](https://travis-ci.org/lflores/spring-maven-tasks.svg?branch=master)](https://travis-ci.org/lflores/spring-maven-tasks)
-[![Sonarcloud Status](https://sonarcloud.io/api/project_badges/measure?project=com.triadsoft:todo-tasks-parent&metric=alert_status)](https://sonarcloud.io/dashboard?id=com.triadsoft:todo-tasks-parent)
-[![Sonarcloud Coverage](https://sonarcloud.io/api/project_badges/measure?project=com.triadsoft:todo-tasks-parent&metric=coverage)](https://sonarcloud.io/dashboard?id=com.triadsoft:todo-tasks-parent)
+[![Sonarcloud Status](https://sonarcloud.io/api/project_badges/measure?project=com.triadsoft:todo-tasks-parent&metric=alert_status)](https://sonarcloud.io/dashboard?id=com.triadsoft:todo-tasks-parent&metric=alert_status)
+[![Sonarcloud Coverage](https://sonarcloud.io/api/project_badges/measure?project=com.triadsoft:todo-tasks-parent&metric=coverage)](https://sonarcloud.io/dashboard?id=com.triadsoft:todo-tasks-parent&metric=coverage)
 
 # Spring-maven-tasks
 This is a demo of API and UI to manage ToDo tasks.
