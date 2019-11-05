@@ -1,4 +1,7 @@
 [![Build Status](https://travis-ci.org/lflores/spring-maven-tasks.svg?branch=master)](https://travis-ci.org/lflores/spring-maven-tasks)
+[![Quality Gate](https://sonarcloud.io/dashboard?id=com.triadsoft:todo-tasks-parent)](https://sonarcloud.io/dashboard?id=com.triadsoft:todo-tasks-parent)
+[![
+https://sonarcloud.io/api/project_badges/measure?project=WcfSoapLogger&metric=code_smells
 
 # Spring-maven-tasks
 This is a demo of API and UI to manage ToDo tasks.
