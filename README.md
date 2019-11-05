@@ -1,7 +1,7 @@
 [![Build Status](https://travis-ci.org/lflores/spring-maven-tasks.svg?branch=master)](https://travis-ci.org/lflores/spring-maven-tasks)
-[![Sonarcloud Status](https://sonarcloud.io/api/project_badges/measure?project=com.triadsoft:todo-tasks-parent&metric=alert_status)](https://sonarcloud.io/dashboard?id=com.triadsoft:todo-tasks-parent&metric=alert_status)
-[![Sonarcloud Coverage](https://sonarcloud.io/api/project_badges/measure?project=com.triadsoft:todo-tasks-parent&metric=coverage)](https://sonarcloud.io/component_measures?id=com.triadsoft:todo-tasks-parent&metric=coverage&view=list)
-[![Sonarcloud Debt](https://sonarcloud.io/api/project_badges/measure?project=com.triadsoft:todo-tasks-parent&metric=sqale_index)](https://sonarcloud.io/component_measures?id=com.triadsoft:todo-tasks-parent&metric=sqale_index&view=list)
+[![Sonarcloud Status](https://sonarcloud.io/api/project_badges/measure?project=com.triadsoft:spring-maven-tasks&metric=alert_status)](https://sonarcloud.io/dashboard?id=com.triadsoft:spring-maven-tasks&metric=alert_status)
+[![Sonarcloud Coverage](https://sonarcloud.io/api/project_badges/measure?project=com.triadsoft:spring-maven-tasks&metric=coverage)](https://sonarcloud.io/component_measures?id=com.triadsoft:spring-maven-tasks&metric=coverage&view=list)
+[![Sonarcloud Debt](https://sonarcloud.io/api/project_badges/measure?project=com.triadsoft:spring-maven-tasks&metric=sqale_index)](https://sonarcloud.io/component_measures?id=com.triadsoft:spring-maven-tasks&metric=sqale_index&view=list)
 
 # Spring-maven-tasks
 This is a demo of API and UI to manage ToDo tasks.
