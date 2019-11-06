@@ -4,11 +4,11 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>todo-tasks-ui</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>todo-tasks-ui</name>
+    <name>tasks-ui</name>
     <description>Demo project for Todo Task List</description>
     <parent>
         <groupId>com.triadsoft</groupId>
-        <artifactId>todo-tasks-parent</artifactId>
+        <artifactId>spring-maven-tasks</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
     <build>
