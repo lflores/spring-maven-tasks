@@ -1,7 +1,7 @@
 package com.triadsoft.config;
 
 import com.triadsoft.exceptions.ErrorResponse;
-import com.triadsoft.exceptions.MyFileNotFoundException;
+import com.triadsoft.exceptions.NotFoundException;
 import com.triadsoft.exceptions.ResourceNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,8 +23,8 @@ import static org.springframework.http.HttpStatus.*;
 public class ControllerExceptionHandler {
     private static final Logger LOGGER = LoggerFactory.getLogger(ControllerExceptionHandler.class);
 
-    @ExceptionHandler(MyFileNotFoundException.class)
-    public final ResponseEntity<Object> handleGenericExceptions(MyFileNotFoundException ex) {
+    @ExceptionHandler(NotFoundException.class)
+    public final ResponseEntity<Object> handleGenericExceptions(NotFoundException ex) {
         LOGGER.error(ex.getMessage(), ex);
         return generateErrorResponse(ex.getMessage(), NOT_FOUND);
     }

@@ -2,7 +2,7 @@ package com.triadsoft.services;
 
 import com.triadsoft.config.FileStorageProperties;
 import com.triadsoft.exceptions.FileStorageException;
-import com.triadsoft.exceptions.MyFileNotFoundException;
+import com.triadsoft.exceptions.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
@@ -74,10 +74,10 @@ public class FileStorageService {
             if (resource.exists()) {
                 return resource;
             } else {
-                throw new MyFileNotFoundException("File not found " + fileName);
+                throw new NotFoundException("File not found " + fileName);
             }
         } catch (MalformedURLException ex) {
-            throw new MyFileNotFoundException("File not found " + fileName, ex);
+            throw new NotFoundException("File not found " + fileName, ex);
         }
     }
 }

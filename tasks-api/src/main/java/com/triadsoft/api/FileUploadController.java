@@ -1,10 +1,10 @@
 package com.triadsoft.api;
 
 import com.triadsoft.api.model.UploadFileResponse;
+import com.triadsoft.exceptions.NotFoundException;
 import com.triadsoft.services.FileStorageService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -15,8 +15,8 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 /**
@@ -28,11 +28,29 @@ import java.util.stream.Collectors;
 public class FileUploadController {
     private static final Logger logger = LoggerFactory.getLogger(FileUploadController.class);
 
-    @Autowired
-    private FileStorageService fileStorageService;
+    private final FileStorageService fileStorageService;
+
+    public FileUploadController(FileStorageService fileStorageService) {
+        this.fileStorageService = fileStorageService;
+    }
 
     @PostMapping("/uploadFile")
-    public UploadFileResponse uploadFile(@RequestParam("file") MultipartFile file) {
+    public UploadFileResponse uploadFile(@RequestParam("file") MultipartFile file) throws NotFoundException {
+        return uploadFileSingle(file);
+    }
+
+    @PostMapping(value = "/uploadMultipleFiles", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public List<UploadFileResponse> uploadMultipleFiles(@RequestPart("file") List<MultipartFile> files) throws NotFoundException {
+        return files
+                .stream()
+                .map(this::uploadFileSingle)
+                .collect(Collectors.toList());
+    }
+
+    private UploadFileResponse uploadFileSingle(MultipartFile file) throws NotFoundException {
+        if (Objects.isNull(file)) {
+            throw new NotFoundException("The file cannot be null");
+        }
         String fileName = fileStorageService.storeFile(file);
 
         String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
@@ -42,14 +60,6 @@ public class FileUploadController {
 
         return new UploadFileResponse(fileName, fileDownloadUri,
                 file.getContentType(), file.getSize());
-    }
-
-    @PostMapping("/uploadMultipleFiles")
-    public List<UploadFileResponse> uploadMultipleFiles(@RequestParam("files") MultipartFile[] files) {
-        return Arrays.asList(files)
-                .stream()
-                .map(file -> uploadFile(file))
-                .collect(Collectors.toList());
     }
 
     @GetMapping("/downloadFile/{fileName:.+}")
