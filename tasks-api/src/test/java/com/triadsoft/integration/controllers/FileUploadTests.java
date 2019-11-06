@@ -1,7 +1,5 @@
 package com.triadsoft.integration.controllers;
 
-import com.sun.xml.internal.ws.encoding.ContentType;
-import org.hamcrest.Matchers;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -9,22 +7,20 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.web.multipart.MultipartResolver;
-import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
 import java.io.IOException;
 import java.io.InputStream;
 
+import static org.hamcrest.Matchers.hasSize;
+import static org.hamcrest.Matchers.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.hamcrest.Matchers.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.*;
 
 /**
  * @author triad <flores.leonardo@gmail.com>
@@ -76,9 +72,9 @@ public class FileUploadTests {
     public void uploadOneFile_notFound() throws Exception {
         mockMvc.perform(fileUpload("/uploadFile").file(null))
                 .andExpect(status().isNotFound())
-                .andExpect(jsonPath("$.status",is(404)))
-                .andExpect(jsonPath("$.error",is("Not Found")))
-                .andExpect(jsonPath("$.message",is("No se encontró la tarea con el id: 15")))
+                .andExpect(jsonPath("$.status", is(404)))
+                .andExpect(jsonPath("$.error", is("Not Found")))
+                .andExpect(jsonPath("$.message", is("No se encontró la tarea con el id: 15")))
                 .andReturn();
     }
 
