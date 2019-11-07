@@ -24,7 +24,9 @@
         <sonar.java.binaries>target</sonar.java.binaries>
         <sonar.sourceEncoding>UTF-8</sonar.sourceEncoding>
         <sonar.java.codeCoveragePlugin>jacoco</sonar.java.codeCoveragePlugin>
-        <sonar.coverage.exclusions>src/main/java/com/triadsoft/exceptions/**/*,src/main/java/com/triadsoft/Application*.*,src/main/java/com/triadsoft/config/**/*,src/test/java/com/triadsoft/**/*</sonar.coverage.exclusions>
+        <sonar.coverage.exclusions>
+            src/main/java/com/triadsoft/exceptions/**/*,src/main/java/com/triadsoft/Application*.*,src/main/java/com/triadsoft/config/**/*,src/test/java/com/triadsoft/**/*,src/main/java/com/triadsoft/services/FileStorageService*
+        </sonar.coverage.exclusions>
     </properties>
 
     <dependencies>
@@ -110,16 +112,17 @@
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
                 <version>${jacoco-maven-plugin.version}</version>
-                    <configuration>
-                        <append>true</append>
-                        <excludes>
-                            <exclude>pom.xml</exclude>
-                            <exclude>com/triadsoft/**/Application*.*</exclude>
-                            <exclude>com/triadsoft/**/*Test*.*</exclude>
-                            <exclude>com/triadsoft/config/**</exclude>
-                            <exclude>com/triadsoft/exceptions/**/*</exclude>
-                        </excludes>
-                    </configuration>
+                <configuration>
+                    <append>true</append>
+                    <excludes>
+                        <exclude>pom.xml</exclude>
+                        <exclude>com/triadsoft/**/Application*.*</exclude>
+                        <exclude>com/triadsoft/**/*Test*.*</exclude>
+                        <exclude>com/triadsoft/config/**</exclude>
+                        <exclude>com/triadsoft/exceptions/**/*</exclude>
+                        <exclude>com/triadsoft/services/FileStorageService*.*</exclude>
+                    </excludes>
+                </configuration>
                 <executions>
                     <execution>
                         <id>prepare-agent</id>

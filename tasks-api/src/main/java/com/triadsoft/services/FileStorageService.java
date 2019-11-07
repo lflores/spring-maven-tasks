@@ -3,6 +3,8 @@ package com.triadsoft.services;
 import com.triadsoft.config.FileStorageProperties;
 import com.triadsoft.exceptions.FileStorageException;
 import com.triadsoft.exceptions.NotFoundException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
@@ -10,6 +12,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.annotation.PostConstruct;
+import javax.servlet.ServletContext;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
@@ -24,13 +28,20 @@ import java.nio.file.StandardCopyOption;
  */
 @Service
 public class FileStorageService {
+    private static final Logger logger = LoggerFactory.getLogger(FileStorageService.class);
+
     private final Path fileStorageLocation;
+    private final ServletContext servletContext;
 
     @Autowired
-    public FileStorageService(FileStorageProperties fileStorageProperties) {
+    public FileStorageService(FileStorageProperties fileStorageProperties, ServletContext servletContext) {
         this.fileStorageLocation = Paths.get(fileStorageProperties.getUploadDir())
                 .toAbsolutePath().normalize();
+        this.servletContext = servletContext;
+    }
 
+    @PostConstruct
+    private void init(){
         try {
             Files.createDirectories(this.fileStorageLocation);
         } catch (Exception ex) {
@@ -79,5 +90,35 @@ public class FileStorageService {
         } catch (MalformedURLException ex) {
             throw new NotFoundException("File not found " + fileName, ex);
         }
+    }
+
+    public String getContentType(Resource resource){
+        // Try to determine file's content type
+        String contentType = null;
+        try {
+            contentType = servletContext.getMimeType(resource.getFile().getAbsolutePath());
+        } catch (IOException ex) {
+            logger.error("Could not determine file type.");
+            throw new FileStorageException("Could not determine file type.");
+        }
+
+        // Fallback to the default content type if type could not be determined
+        if (contentType == null) {
+            contentType = "application/octet-stream";
+        }
+        return contentType;
+    }
+
+    public long getContentSize(Resource resource){
+        long size =-1;
+        try {
+            size = resource.getFile().length();
+        } catch (IOException e) {
+            throw new NotFoundException(String.format("The file %s cannot be found",resource.getFilename()));
+        }
+        if(size<0){
+            throw new NotFoundException(String.format("The file size for file %s cannot be found",resource.getFilename()));
+        }
+        return size;
     }
 }

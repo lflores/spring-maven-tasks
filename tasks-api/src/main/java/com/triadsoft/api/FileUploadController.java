@@ -3,8 +3,6 @@ package com.triadsoft.api;
 import com.triadsoft.api.model.UploadFileResponse;
 import com.triadsoft.exceptions.NotFoundException;
 import com.triadsoft.services.FileStorageService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -13,8 +11,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import javax.servlet.http.HttpServletRequest;
-import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -26,8 +22,6 @@ import java.util.stream.Collectors;
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
 public class FileUploadController {
-    private static final Logger logger = LoggerFactory.getLogger(FileUploadController.class);
-
     private final FileStorageService fileStorageService;
 
     public FileUploadController(FileStorageService fileStorageService) {
@@ -63,24 +57,17 @@ public class FileUploadController {
     }
 
     @GetMapping("/downloadFile/{fileName:.+}")
-    public ResponseEntity<Resource> downloadFile(@PathVariable String fileName, HttpServletRequest request) {
-        // Load file as Resource
+    public ResponseEntity<Resource> downloadFile(@PathVariable String fileName) {
         Resource resource = fileStorageService.loadFileAsResource(fileName);
+        String contentType = fileStorageService.getContentType(resource);
+        long size = fileStorageService.getContentSize(resource);
 
-        // Try to determine file's content type
-        String contentType = null;
-        try {
-            contentType = request.getServletContext().getMimeType(resource.getFile().getAbsolutePath());
-        } catch (IOException ex) {
-            logger.info("Could not determine file type.");
-        }
-
-        // Fallback to the default content type if type could not be determined
-        if (contentType == null) {
-            contentType = "application/octet-stream";
+        if (Objects.isNull(resource)) {
+            throw new NotFoundException(String.format("The file %s cannot be found", fileName));
         }
 
         return ResponseEntity.ok()
+                .contentLength(size)
                 .contentType(MediaType.parseMediaType(contentType))
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"")
                 .body(resource);

@@ -1,6 +1,7 @@
 package com.triadsoft.config;
 
 import com.triadsoft.exceptions.ErrorResponse;
+import com.triadsoft.exceptions.FileStorageException;
 import com.triadsoft.exceptions.NotFoundException;
 import com.triadsoft.exceptions.ResourceNotFoundException;
 import org.slf4j.Logger;
@@ -45,6 +46,12 @@ public class ControllerExceptionHandler {
     public final ResponseEntity<Object> handleGenericExceptions(ValidationException ex) {
         LOGGER.error(ex.getMessage(), ex);
         return generateErrorResponse(ex.getMessage(), UNPROCESSABLE_ENTITY);
+    }
+
+    @ExceptionHandler(FileStorageException.class)
+    public final ResponseEntity<Object> handleGenericExceptions(FileStorageException ex) {
+        LOGGER.error(ex.getMessage(), ex);
+        return generateErrorResponse("HTTP 500 Internal Error", INTERNAL_SERVER_ERROR);
     }
 
     @ExceptionHandler(Exception.class)

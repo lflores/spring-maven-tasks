@@ -9,6 +9,9 @@ import org.junit.rules.TemporaryFolder;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import javax.servlet.ServletContext;
 
 import static org.mockito.Mockito.*;
 
@@ -27,10 +30,13 @@ public class FileStorageServiceTests {
     @Mock
     private FileStorageService fileStorageService;
 
+    @Autowired
+    ServletContext servletContext;
+
     @Before
     public void onLoad(){
         when(fileStorageProperties.getUploadDir()).thenReturn("dummy-dir");
-        fileStorageService = new FileStorageService(fileStorageProperties);
+        fileStorageService = new FileStorageService(fileStorageProperties,servletContext);
     }
 
     @Test
