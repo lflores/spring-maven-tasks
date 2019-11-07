@@ -17,7 +17,7 @@ import javax.xml.bind.ValidationException;
 import static org.springframework.http.HttpStatus.*;
 
 /**
- * @author triad <leonardo.flores@overactive.com>
+ * @author triad <flores.leonardo@gmail.com>
  * Created 4/11/19 15:12
  */
 @ControllerAdvice("com.triadsoft.api")

@@ -16,7 +16,7 @@ import javax.servlet.ServletContext;
 import static org.mockito.Mockito.*;
 
 /**
- * @author triad <leonardo.flores@overactive.com>
+ * @author triad <flores.leonardo@gmail.com>
  * Created 4/11/19 16:01
  */
 @RunWith(MockitoJUnitRunner.StrictStubs.class)

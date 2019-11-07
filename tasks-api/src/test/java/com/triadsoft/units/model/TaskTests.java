@@ -10,7 +10,7 @@ import java.util.Objects;
 import static org.junit.Assert.*;
 
 /**
- * @author triad <leonardo.flores@overactive.com>
+ * @author triad <flores.leonardo@gmail.com>
  * Created 4/11/19 14:51
  */
 @RunWith(MockitoJUnitRunner.StrictStubs.class)

@@ -21,7 +21,7 @@ import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
 /**
- * @author triad <leonardo.flores@overactive.com>
+ * @author triad <flores.leonardo@gmail.com>
  * Created 4/11/19 10:09
  */
 @RunWith(MockitoJUnitRunner.StrictStubs.class)

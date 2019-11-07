@@ -27,7 +27,7 @@ import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
 
 /**
- * @author triad <leonardo.flores@overactive.com>
+ * @author triad <flores.leonardo@gmail.com>
  * Created 4/11/19 16:24
  */
 @RunWith(SpringRunner.class)

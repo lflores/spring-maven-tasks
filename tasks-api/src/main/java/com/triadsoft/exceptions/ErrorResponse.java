@@ -1,7 +1,7 @@
 package com.triadsoft.exceptions;
 
 /**
- * @author triad <leonardo.flores@overactive.com>
+ * @author triad <flores.leonardo@gmail.com>
  * Created 4/11/19 15:14
  */
 public class ErrorResponse {
