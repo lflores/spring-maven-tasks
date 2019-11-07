@@ -59,7 +59,7 @@ public class FileUploadTests {
 
     @Test
     public void uploadOneFile() throws Exception {
-        mockMvc.perform(fileUpload("/uploadFile").file(avatar))
+        mockMvc.perform(multipart("/uploadFile").file(avatar))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.fileName").value("mate-grande.png"))
                 .andExpect(jsonPath("$.fileDownloadUri").value("http://localhost/downloadFile/mate-grande.png"))
@@ -70,7 +70,7 @@ public class FileUploadTests {
 
     @Test(expected = IllegalArgumentException.class)
     public void uploadOneFile_notFound() throws Exception {
-        mockMvc.perform(fileUpload("/uploadFile").file(null))
+        mockMvc.perform(multipart("/uploadFile").file(null))
                 .andExpect(status().isNotFound())
                 .andExpect(jsonPath("$.status", is(404)))
                 .andExpect(jsonPath("$.error", is("Not Found")))

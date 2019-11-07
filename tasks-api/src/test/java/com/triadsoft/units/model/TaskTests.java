@@ -17,7 +17,7 @@ import static org.junit.Assert.*;
 public class TaskTests {
 
     @Test
-    public void newTaskTest_sameTask() {
+    public void taskTest_sameTask() {
         Task task1 = new Task(1, "Task1 Test");
         Task task2 = new Task(1, "Task1 Test");
         assertTrue(task1.equals(task2));
@@ -30,6 +30,33 @@ public class TaskTests {
         Task2 task2 = new Task2(1, "Task1 Test");
         assertFalse(task1.equals(task2));
     }
+
+    @Test
+    public void taskTest_notEqual_id() {
+        Task task1 = new Task(1, "Task1 Test");
+        Task task2 = new Task(2, "Task2 Test");
+        assertFalse(task1.equals(task2));
+        assertNotEquals(task1.hashCode(), task2.hashCode());
+    }
+
+    @Test
+    public void taskTest_notEqual_description() {
+        Task task1 = new Task(1, "Task1 Test");
+        Task task2 = new Task(1, "Task2 Test");
+        assertFalse(task1.equals(task2));
+        assertNotEquals(task1.hashCode(), task2.hashCode());
+    }
+
+    @Test
+    public void taskTest_notEqual_status() {
+        Task task1 = new Task(1, "Task1 Test");
+        Task task2 = new Task(1, "Task1 Test");
+        task1.setStatus("Test1");
+        task1.setStatus("Test2");
+        assertFalse(task1.equals(task2));
+        assertNotEquals(task1.hashCode(), task2.hashCode());
+    }
+
 
     private class Task2{
         private Integer id;
