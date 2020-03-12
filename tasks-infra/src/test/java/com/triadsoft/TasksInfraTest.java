@@ -1,4 +1,4 @@
-package com.myorg;
+package com.triadsoft;
 
 import software.amazon.awscdk.core.App;
 import com.fasterxml.jackson.databind.JsonNode;
