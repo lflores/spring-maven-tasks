@@ -14,5 +14,6 @@
     <modules>
         <module>tasks-api</module>
         <module>tasks-ui</module>
+        <module>tasks-infra</module>
     </modules>
 </project>
