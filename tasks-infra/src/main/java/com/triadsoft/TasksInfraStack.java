@@ -26,9 +26,10 @@ public class TasksInfraStack extends Stack {
                 .create(this, "tasks-cluster-dev")
                 .vpc(vpc).build();
 
-        IRepository repository = Repository.fromRepositoryName(this,"task-api","task-api");
+        IRepository repository = Repository.fromRepositoryName(this,"task-api","tasks-api");
+
         //Create a load-balanced Fargate service and make it public
-        ApplicationLoadBalancedFargateService.Builder.create(this, "tasks-service-dev")
+        ApplicationLoadBalancedFargateService service = ApplicationLoadBalancedFargateService.Builder.create(this, "tasks-service-dev")
                 .cluster(cluster)           // Required
                 .cpu(512)                   // Default is 256
                 .desiredCount(4)            // Default is 1
@@ -36,9 +37,13 @@ public class TasksInfraStack extends Stack {
                         ApplicationLoadBalancedTaskImageOptions.builder()
                                 //.image(ContainerImage.fromRegistry("amazon/amazon-ecs-sample"))
                                 .image(ContainerImage.fromEcrRepository(repository,"latest"))
+                                //.containerPort(8080)
+                                .containerName("tasks-container")
                                 .build())
                 .memoryLimitMiB(2048)       // Default is 512
                 .publicLoadBalancer(true)   // Default is false
+                //.listenerPort(8080)
                 .build();
+        //repository.grantPull(service.getTaskDefinition().obtainExecutionRole());
     }
 }
